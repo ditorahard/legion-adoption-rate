@@ -7,10 +7,10 @@ import {
 
 import { Bar } from 'react-chartjs-2';
 
-import { Body, Box, Card, Flex, Heading } from 'legion-ui'
+import { Body, Box, Caption, Card, Flex, Heading } from 'legion-ui'
 
 import { data1 } from '../data/data'
-import { Logo } from '@/components/icons';
+import { BookOpen, Code, Figma, Folder, Logo } from '@/components/icons';
 
 
 ChartJS.register(
@@ -90,18 +90,83 @@ const nonLegionData = {
 
 export default function Chart() {
     return <Box>
-        <Flex px={3} bg='black' sx={{height: '64px', alignItems: 'center'}}>
+        <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
             <Logo />
         </Flex>
 
-        <Box px={2}>
-            <Heading size='h5'>
+        <Box px={4} mt={'24px'}>
+            <Heading size='h5' sx={{ fontFamily: 'Nunito !important' }}>
                 Hi, Welcome Back
             </Heading>
+            <Caption size='lg_regular'>
+                Legion design system adoption rate analytic dashboard
+            </Caption>
         </Box>
-
-        <Box p={2}>
-            <Card variant='shadow' p={3} sx={{ width: '100%' }}>
+        {/* TODO Tab */}
+        <Box p={4}>
+            <Flex sx={{ gap: '24px', width: '100%' }}>
+                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                    <Flex sx={{ alignItems: 'center' }}>
+                        <Box>
+                            <Body size='sm_regular'>
+                                Design Assets Website
+                            </Body>
+                            <Heading size="h4">
+                                ? Component
+                            </Heading>
+                        </Box>
+                        <Box ml="auto">
+                            <Figma />
+                        </Box>
+                    </Flex>
+                </Card>
+                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                    <Flex sx={{ alignItems: 'center' }}>
+                        <Box>
+                            <Body size='sm_regular'>
+                                Code Assets Website
+                            </Body>
+                            <Heading size="h4">
+                                ? Component
+                            </Heading>
+                        </Box>
+                        <Box ml="auto">
+                            <Code />
+                        </Box>
+                    </Flex>
+                </Card>
+                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                    <Flex sx={{ alignItems: 'center' }}>
+                        <Box>
+                            <Body size='sm_regular'>
+                                Documentation Assets Website
+                            </Body>
+                            <Heading size="h4">
+                                ? Content
+                            </Heading>
+                        </Box>
+                        <Box ml="auto">
+                            <BookOpen />
+                        </Box>
+                    </Flex>
+                </Card>
+                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                    <Flex sx={{ alignItems: 'center' }}>
+                        <Box>
+                            <Body size='sm_regular'>
+                                Total Repository Usage
+                            </Body>
+                            <Heading size="h4">
+                                ? Repository
+                            </Heading>
+                        </Box>
+                        <Box ml="auto">
+                            <Folder />
+                        </Box>
+                    </Flex>
+                </Card>
+            </Flex>
+            <Card mt="24px" variant='shadow' p={3} sx={{ width: '100%' }}>
                 <Box>
                     <Body size="lg_bold" sx={{ display: 'block' }}>
                         Design system Adoption
