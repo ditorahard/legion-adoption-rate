@@ -26,6 +26,13 @@ export const options = {
             borderWidth: 2,
         },
     },
+    scales: {
+        y: {
+            ticks: {
+                autoSkip: false
+            }
+        }
+    },
     responsive: true,
     plugins: {
         legend: {
@@ -82,8 +89,8 @@ const nonLegionData = {
         {
             label: 'Dataset 1',
             data: nonLegionUsages.usages,
-            borderColor: 'rgb(135,91,247)',
-            backgroundColor: 'rgb(135,91,247)',
+            borderColor: 'rgb(247,144,9)',
+            backgroundColor: 'rgb(247,144,9)',
         },
     ],
 };
