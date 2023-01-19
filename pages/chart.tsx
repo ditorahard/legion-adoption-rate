@@ -54,22 +54,16 @@ const getAdaptionByType = (type: 'target' | 'homebrew') => data1
     })
     .sort((a, b) => b.usages - a.usages)
 
-const adaptionDataToChartData = (type: 'target' | 'homebrew') => ({
-    ...getAdaptionByType(type).reduce<{ labels: string[], usages: number[] }>((acc, { component, usages }) => {
+const adaptionDataToChartData = (type: 'target' | 'homebrew') =>
+    getAdaptionByType(type).reduce<{ labels: string[], usages: number[] }>((acc, { component, usages }) => {
         return { labels: [...acc.labels, component], usages: [...acc.usages, usages] }
     }, { labels: [], usages: [] })
-})
 
-const legionUsages = {
-    ...adaptionDataToChartData('target')
-}
+const legionUsages =
+    adaptionDataToChartData('target')
 
-const nonLegionUsages = {
-    ...adaptionDataToChartData('homebrew')
-}
-const { labels, usages } = getAdaptionByType('target').reduce<{ labels: string[], usages: number[] }>((acc, { component, usages }) => {
-    return { labels: [...acc.labels, component], usages: [...acc.usages, usages] }
-}, { labels: [], usages: [] });
+const nonLegionUsages =
+    adaptionDataToChartData('homebrew')
 
 const legionData = {
     labels: legionUsages.labels,
