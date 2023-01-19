@@ -1,4 +1,4 @@
-import { ThemeProvider, theme } from '../../../legion-ui/dist/legion-ui.esm'
+import { ThemeProvider, theme } from 'legion-ui'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 
