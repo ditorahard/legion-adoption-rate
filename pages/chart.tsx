@@ -140,7 +140,7 @@ const usagesByMonthChartData = {
 
 
 export default function Chart() {
-    return <Box>
+    return <Box bg="secondary25">
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
             <Logo />
         </Flex>
@@ -156,14 +156,14 @@ export default function Chart() {
         {/* TODO Tab */}
         <Box p={4}>
             <Flex sx={{ gap: '24px', width: '100%' }}>
-                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
                                 Design Assets Website
                             </Body>
                             <Heading size="h4">
-                                ? Component
+                                28 Component
                             </Heading>
                         </Box>
                         <Box ml="auto">
@@ -171,14 +171,14 @@ export default function Chart() {
                         </Box>
                     </Flex>
                 </Card>
-                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
                                 Code Assets Website
                             </Body>
                             <Heading size="h4">
-                                ? Component
+                                27 Component
                             </Heading>
                         </Box>
                         <Box ml="auto">
@@ -186,14 +186,14 @@ export default function Chart() {
                         </Box>
                     </Flex>
                 </Card>
-                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
                                 Documentation Assets Website
                             </Body>
                             <Heading size="h4">
-                                ? Content
+                                20 Content
                             </Heading>
                         </Box>
                         <Box ml="auto">
@@ -201,14 +201,14 @@ export default function Chart() {
                         </Box>
                     </Flex>
                 </Card>
-                <Card p={3} variant="shadow" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
                                 Total Repository Usage
                             </Body>
                             <Heading size="h4">
-                                ? Repository
+                                2 Repository
                             </Heading>
                         </Box>
                         <Box ml="auto">
@@ -218,13 +218,13 @@ export default function Chart() {
                 </Card>
             </Flex>
             <Flex mt="24px" sx={{ gap: '24px' }}>
-                <Card variant='shadow' p={3} sx={{ width: '25%' }}>
+                <Card variant='bordered' p={3} sx={{ width: '25%' }}>
                     <Body size="lg_bold">
-                        Assets Coverage
+                        Assets Adoption
                     </Body>
                     <Box>
                         <Body size="sm_regular">
-                            Total of components coverage in projects
+                            Total of components adoption in projects
                         </Body>
                     </Box>
                     <Box mt={3} >
@@ -266,7 +266,7 @@ export default function Chart() {
                     </Box>
                     <Box >
                         <Body size="sm_regular">
-                            Top leader of adoption / usage legion assets
+                            Top leader of adoption legion assets
                         </Body>
                     </Box>
                     <Flex mt="24px" sx={{ flexDirection: 'column', gap: '16px' }}>
@@ -312,7 +312,7 @@ export default function Chart() {
                         </Flex>
                     </Flex>
                 </Card>
-                <Card variant='shadow' p={3} sx={{ width: '75%' }}>
+                <Card variant='bordered' p={3} sx={{ width: '75%' }}>
                     <Box>
                         <Body size="lg_bold" sx={{ display: 'block' }}>
                             Design system Adoption
@@ -328,7 +328,7 @@ export default function Chart() {
                     }} />
                 </Card>
             </Flex>
-            <Card mt="24px" variant='shadow' p={3} sx={{ width: '100%' }}>
+            <Card mt="24px" variant='bordered' p={3} sx={{ width: '100%' }}>
                 <Box>
                     <Body size="lg_bold" sx={{ display: 'block' }}>
                         Component Asset system Adoption
