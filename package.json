@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare:data": "ts-node scripts/index.ts > data/usages_by_month.json" 
+    "prepare:data": "ts-node scripts/index.ts > data/usages_by_month.json"
   },
   "dependencies": {
     "@next/font": "13.1.2",

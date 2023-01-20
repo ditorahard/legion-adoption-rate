@@ -24,7 +24,7 @@ ChartJS.register(
     BarElement,
     PointElement,
     LineElement,
-    Filler
+    Filler,
 );
 
 export const options = {
@@ -103,8 +103,6 @@ const usagesByMonthOptions = {
 
 const labels = Object.keys(usagesByMonth).reverse().filter((v => v !== 'default'))
 
-
-
 const { legionUI, nonLegionUI } = Object.values(usagesByMonth)
     .reverse()
     .reduce<{ legionUI: number[], nonLegionUI: number[] }>((acc, { legionUI, nonLegionUI }) => ({
@@ -115,7 +113,6 @@ const { legionUI, nonLegionUI } = Object.values(usagesByMonth)
             legionUI: [],
             nonLegionUI: []
         })
-        
 const usagesByMonthChartData = {
     labels,
     fill: true,
@@ -123,17 +120,16 @@ const usagesByMonthChartData = {
         {
             label: 'legion Assets',
             data: legionUI,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgb(135, 91, 247)',
+            backgroundColor: 'rgba(135, 91, 247, 0.5)',
             fill: true,
-            lineTension: 0.4
-
+            lineTension: 0.4,
         },
         {
             label: 'Local Assets',
             data: nonLegionUI,
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            borderColor: 'rgb(247, 144, 9)',
+            backgroundColor: 'rgba(247, 144, 9, 0.5)',
             fill: true,
             lineTension: 0.4
         },
@@ -155,9 +151,6 @@ export default function Chart() {
             <Caption size='lg_regular'>
                 Legion design system adoption rate analytic dashboard
             </Caption>
-            <Box sx={{ height: '328px' }}>
-                <Line options={usagesByMonthOptions} data={usagesByMonthChartData} />
-            </Box>
         </Box>
         {/* TODO Tab */}
         <Box p={4}>
@@ -223,10 +216,79 @@ export default function Chart() {
                     </Flex>
                 </Card>
             </Flex>
+            <Flex mt="24px" sx={{ gap: '24px' }}>
+                <Card variant='shadow' p={3} sx={{ width: '25%' }}>
+                    <Body size="lg_bold">
+                        Assets Coverage
+                    </Body>
+                    <Box>
+                        <Body size="sm_regular">
+                            Total of components coverage in projects
+                        </Body>
+                    </Box>
+                    <Box mt={3} >
+                        <Body size="lg_bold">
+                            ?%
+                        </Body>
+                    </Box>
+                    <Box bg="#DDE2EF" sx={{
+                        position: 'relative',
+                        height: '4px',
+                        borderRadius: '20px',
+                        overflow: 'hidden',
+                    }}>
+                        <Flex
+                            role="progressbar"
+                            aria-valuemax={100}
+                            aria-valuemin={0}
+                            aria-valuenow={80}
+                            aria-label="Assets Coverage"
+                            bg="success500"
+                            sx={{
+                                width: '50%',
+                                borderRadius: '20px',
+                                position: 'absolute',
+                                top: 0,
+                                bottom: 0,
+                                left: 0,
+                                height: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        />
+
+                    </Box>
+                    <Box mt={"24px"} >
+                        <Body size="lg_bold">
+                            Leaderboard Project
+                        </Body>
+                    </Box>
+                    <Box >
+                        <Body size="sm_regular">
+                            Top leader of adoption / usage legion assets
+                        </Body>
+                    </Box>
+                </Card>
+                <Card variant='shadow' p={3} sx={{ width: '75%' }}>
+                    <Box>
+                        <Body size="lg_bold" sx={{ display: 'block' }}>
+                            Design system Adoption
+                        </Body>
+                    </Box>
+                    <Box mb="24px">
+                        <Body size="sm_regular" sx={{ display: 'block' }}>
+                            Design system vs local component usages across all tracked projects
+                        </Body>
+                    </Box>
+                    <Line options={usagesByMonthOptions} data={usagesByMonthChartData} style={{
+                        maxHeight: '328px'
+                    }} />
+                </Card>
+            </Flex>
             <Card mt="24px" variant='shadow' p={3} sx={{ width: '100%' }}>
                 <Box>
                     <Body size="lg_bold" sx={{ display: 'block' }}>
-                        Design system Adoption
+                        Component Asset system Adoption
                     </Body>
                 </Box>
                 <Box>
@@ -254,5 +316,5 @@ export default function Chart() {
                 </Flex>
             </Card>
         </Box>
-    </Box>
+    </Box >
 }
