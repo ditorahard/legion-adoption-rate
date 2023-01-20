@@ -1,0 +1,220 @@
+{
+    "latestUpdatedDate": "19 Jan 2023",
+    "data": [
+        {
+            "weeksAgo": 0,
+            "type": "homebrew",
+            "usages": 36
+        },
+        {
+            "weeksAgo": 0,
+            "type": "target",
+            "usages": 151
+        },
+        {
+            "weeksAgo": 1,
+            "type": "homebrew",
+            "usages": 36
+        },
+        {
+            "weeksAgo": 1,
+            "type": "target",
+            "usages": 151
+        },
+        {
+            "weeksAgo": 2,
+            "type": "homebrew",
+            "usages": 36
+        },
+        {
+            "weeksAgo": 2,
+            "type": "target",
+            "usages": 151
+        },
+        {
+            "weeksAgo": 3,
+            "type": "homebrew",
+            "usages": 36
+        },
+        {
+            "weeksAgo": 3,
+            "type": "target",
+            "usages": 151
+        },
+        {
+            "weeksAgo": 4,
+            "type": "homebrew",
+            "usages": 36
+        },
+        {
+            "weeksAgo": 4,
+            "type": "target",
+            "usages": 151
+        },
+        {
+            "weeksAgo": 5,
+            "type": "homebrew",
+            "usages": 29
+        },
+        {
+            "weeksAgo": 5,
+            "type": "target",
+            "usages": 149
+        },
+        {
+            "weeksAgo": 6,
+            "type": "homebrew",
+            "usages": 29
+        },
+        {
+            "weeksAgo": 6,
+            "type": "target",
+            "usages": 149
+        },
+        {
+            "weeksAgo": 7,
+            "type": "homebrew",
+            "usages": 29
+        },
+        {
+            "weeksAgo": 7,
+            "type": "target",
+            "usages": 150
+        },
+        {
+            "weeksAgo": 8,
+            "type": "homebrew",
+            "usages": 17
+        },
+        {
+            "weeksAgo": 8,
+            "type": "target",
+            "usages": 89
+        },
+        {
+            "weeksAgo": 9,
+            "type": "homebrew",
+            "usages": 17
+        },
+        {
+            "weeksAgo": 9,
+            "type": "target",
+            "usages": 89
+        },
+        {
+            "weeksAgo": 10,
+            "type": "homebrew",
+            "usages": 22
+        },
+        {
+            "weeksAgo": 10,
+            "type": "target",
+            "usages": 12
+        },
+        {
+            "weeksAgo": 11,
+            "type": "homebrew",
+            "usages": 12
+        },
+        {
+            "weeksAgo": 11,
+            "type": "target",
+            "usages": 11
+        },
+        {
+            "weeksAgo": 12,
+            "type": "homebrew",
+            "usages": 12
+        },
+        {
+            "weeksAgo": 12,
+            "type": "target",
+            "usages": 11
+        },
+        {
+            "weeksAgo": 13,
+            "type": "homebrew",
+            "usages": 12
+        },
+        {
+            "weeksAgo": 13,
+            "type": "target",
+            "usages": 3
+        },
+        {
+            "weeksAgo": 14,
+            "type": "homebrew",
+            "usages": 10
+        },
+        {
+            "weeksAgo": 14,
+            "type": "target",
+            "usages": 3
+        },
+        {
+            "weeksAgo": 15,
+            "type": "homebrew",
+            "usages": 10
+        },
+        {
+            "weeksAgo": 15,
+            "type": "target",
+            "usages": 3
+        },
+        {
+            "weeksAgo": 16,
+            "type": "homebrew",
+            "usages": 10
+        },
+        {
+            "weeksAgo": 16,
+            "type": "target",
+            "usages": 3
+        },
+        {
+            "weeksAgo": 17,
+            "type": "homebrew",
+            "usages": 10
+        },
+        {
+            "weeksAgo": 17,
+            "type": "target",
+            "usages": 3
+        },
+        {
+            "weeksAgo": 18,
+            "type": "homebrew",
+            "usages": 10
+        },
+        {
+            "weeksAgo": 18,
+            "type": "target",
+            "usages": 3
+        },
+        {
+            "weeksAgo": 19,
+            "type": "homebrew",
+            "usages": 10
+        },
+        {
+            "weeksAgo": 19,
+            "type": "target",
+            "usages": 2
+        },
+        {
+            "weeksAgo": 20,
+            "type": "homebrew",
+            "usages": 9
+        },
+        {
+            "weeksAgo": 20,
+            "type": "target",
+            "usages": 1
+        },
+        {
+            "weeksAgo": 21,
+            "type": "homebrew",
+            "usages": 7
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "01-2023": {
+        "legionUI": 151,
+        "nonLegionUI": 36
+    },
+    "12-2022": {
+        "legionUI": 151,
+        "nonLegionUI": 36
+    },
+    "11-2022": {
+        "legionUI": 89,
+        "nonLegionUI": 17
+    },
+    "10-2022": {
+        "legionUI": 11,
+        "nonLegionUI": 12
+    },
+    "09-2022": {
+        "legionUI": 3,
+        "nonLegionUI": 10
+    },
+    "08-2022": {
+        "legionUI": 0,
+        "nonLegionUI": 7
+    }
+}
