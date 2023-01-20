@@ -5,7 +5,9 @@ import {
     BarElement,
     PointElement,
     LineElement,
-    Filler
+    Filler,
+    Tooltip,
+    Legend
 } from 'chart.js';
 
 import { Bar, Line } from 'react-chartjs-2';
@@ -15,7 +17,6 @@ import { Body, Box, Caption, Card, Flex, Heading } from 'legion-ui'
 import { data1 } from '../data/data'
 import * as usagesByMonth from '../data/usages_by_month.json'
 import { BookOpen, Code, Figma, Folder, Logo } from '@/components/icons';
-import { access } from 'fs';
 
 
 ChartJS.register(
@@ -25,6 +26,8 @@ ChartJS.register(
     PointElement,
     LineElement,
     Filler,
+    Tooltip,
+    Legend
 );
 
 export const options = {
@@ -42,11 +45,6 @@ export const options = {
         }
     },
     responsive: true,
-    plugins: {
-        legend: {
-            position: 'right' as const,
-        },
-    },
 };
 
 
@@ -99,6 +97,9 @@ const nonLegionData = {
 
 const usagesByMonthOptions = {
     responsive: true,
+    legend: {
+        position: 'right' as const,
+    },
 };
 
 const labels = Object.keys(usagesByMonth).reverse().filter((v => v !== 'default'))
