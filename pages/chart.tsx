@@ -268,6 +268,48 @@ export default function Chart() {
                             Top leader of adoption / usage legion assets
                         </Body>
                     </Box>
+                    <Flex mt="24px" sx={{ flexDirection: 'column', gap: '16px' }}>
+                        <Flex>
+                            <Body size="sm_regular">
+                                Logee Port Repo
+                            </Body>
+                            <Body size="sm_bold" ml="auto">
+                                ?%
+                            </Body>
+                        </Flex>
+                        <Flex>
+                            <Body size="sm_regular">
+                                QIP Website Repo
+                            </Body>
+                            <Body size="sm_bold" ml="auto">
+                                ?%
+                            </Body>
+                        </Flex>
+                        <Flex>
+                            <Body size="sm_regular">
+                                Logee Order Repo
+                            </Body>
+                            <Body size="sm_bold" ml="auto">
+                                ?%
+                            </Body>
+                        </Flex>
+                        <Flex>
+                            <Body size="sm_regular">
+                                Agree Mart Website
+                            </Body>
+                            <Body size="sm_bold" ml="auto">
+                                ?%
+                            </Body>
+                        </Flex>
+                        <Flex>
+                            <Body size="sm_regular">
+                                MyTens Website
+                            </Body>
+                            <Body size="sm_bold" ml="auto">
+                                ?%
+                            </Body>
+                        </Flex>
+                    </Flex>
                 </Card>
                 <Card variant='shadow' p={3} sx={{ width: '75%' }}>
                     <Box>
