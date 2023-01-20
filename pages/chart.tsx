@@ -3,20 +3,28 @@ import {
     CategoryScale,
     LinearScale,
     BarElement,
+    PointElement,
+    LineElement,
+    Filler
 } from 'chart.js';
 
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
 import { Body, Box, Caption, Card, Flex, Heading } from 'legion-ui'
 
 import { data1 } from '../data/data'
+import * as usagesByMonth from '../data/usages_by_month.json'
 import { BookOpen, Code, Figma, Folder, Logo } from '@/components/icons';
+import { access } from 'fs';
 
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
     BarElement,
+    PointElement,
+    LineElement,
+    Filler
 );
 
 export const options = {
@@ -89,6 +97,51 @@ const nonLegionData = {
     ],
 };
 
+const usagesByMonthOptions = {
+    responsive: true,
+};
+
+const labels = Object.keys(usagesByMonth).reverse().filter((v => v !== 'default'))
+
+
+
+const { legionUI, nonLegionUI } = Object.values(usagesByMonth)
+    .reverse()
+    .reduce<{ legionUI: number[], nonLegionUI: number[] }>((acc, { legionUI, nonLegionUI }) => ({
+        legionUI: legionUI === undefined ? acc.legionUI : [...acc.legionUI, legionUI],
+        nonLegionUI: nonLegionUI === undefined ? acc.nonLegionUI : [...acc.nonLegionUI, nonLegionUI]
+    })
+        , {
+            legionUI: [],
+            nonLegionUI: []
+        })
+        
+const usagesByMonthChartData = {
+    labels,
+    fill: true,
+    datasets: [
+        {
+            label: 'legion Assets',
+            data: legionUI,
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            fill: true,
+            lineTension: 0.4
+
+        },
+        {
+            label: 'Local Assets',
+            data: nonLegionUI,
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            fill: true,
+            lineTension: 0.4
+        },
+    ],
+};
+
+
+
 export default function Chart() {
     return <Box>
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
@@ -102,6 +155,9 @@ export default function Chart() {
             <Caption size='lg_regular'>
                 Legion design system adoption rate analytic dashboard
             </Caption>
+            <Box sx={{ height: '328px' }}>
+                <Line options={usagesByMonthOptions} data={usagesByMonthChartData} />
+            </Box>
         </Box>
         {/* TODO Tab */}
         <Box p={4}>
