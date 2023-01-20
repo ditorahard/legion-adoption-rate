@@ -156,7 +156,7 @@ export default function Chart() {
         {/* TODO Tab */}
         <Box p={4}>
             <Flex sx={{ gap: '24px', width: '100%' }}>
-                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
@@ -171,7 +171,7 @@ export default function Chart() {
                         </Box>
                     </Flex>
                 </Card>
-                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
@@ -186,7 +186,7 @@ export default function Chart() {
                         </Box>
                     </Flex>
                 </Card>
-                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
@@ -201,7 +201,7 @@ export default function Chart() {
                         </Box>
                     </Flex>
                 </Card>
-                <Card p={3} variant="bordered" sx={{ width: '25%' }}>
+                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
                     <Flex sx={{ alignItems: 'center' }}>
                         <Box>
                             <Body size='sm_regular'>
@@ -218,7 +218,7 @@ export default function Chart() {
                 </Card>
             </Flex>
             <Flex mt="24px" sx={{ gap: '24px' }}>
-                <Card variant='bordered' p={3} sx={{ width: '25%' }}>
+                <Card variant='bordered' p={3} sx={{ width: '24%' }}>
                     <Body size="lg_bold">
                         Assets Adoption
                     </Body>
