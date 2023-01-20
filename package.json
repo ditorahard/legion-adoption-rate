@@ -18,7 +18,7 @@
     "dayjs": "^1.11.7",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
-    "legion-ui": "^1.0.25",
+    "legion-ui": "^1.0.26",
     "next": "13.1.2",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
