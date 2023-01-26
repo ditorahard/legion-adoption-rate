@@ -30,7 +30,7 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
+const options = {
     indexAxis: 'y' as const,
     elements: {
         bar: {
@@ -41,10 +41,11 @@ export const options = {
         y: {
             ticks: {
                 autoSkip: false
-            }
-        }
+            },
+        },
+
     },
-    responsive: true,
+    responsive: false,
 };
 
 
@@ -75,10 +76,13 @@ const legionData = {
     labels: legionUsages.labels,
     datasets: [
         {
-            label: 'Dataset 1',
+            label: 'Legion Assets',
             data: legionUsages.usages,
             borderColor: 'rgb(135,91,247)',
             backgroundColor: 'rgb(135,91,247)',
+            categoryPercentage: 1,
+            barPercentage: 0.8,
+            barThickness: 16
         },
     ],
 };
@@ -87,7 +91,7 @@ const nonLegionData = {
     labels: nonLegionUsages.labels,
     datasets: [
         {
-            label: 'Dataset 1',
+            label: 'Local Assets',
             data: nonLegionUsages.usages,
             borderColor: 'rgb(247,144,9)',
             backgroundColor: 'rgb(247,144,9)',
@@ -119,7 +123,7 @@ const usagesByMonthChartData = {
     fill: true,
     datasets: [
         {
-            label: 'legion Assets',
+            label: 'Legion Assets',
             data: legionUI,
             borderColor: 'rgb(135, 91, 247)',
             backgroundColor: 'rgba(135, 91, 247, 0.5)',
@@ -346,7 +350,7 @@ export default function Chart() {
                                 Legion Assets
                             </Body>
                         </Box>
-                        <Bar options={options} data={legionData} />
+                        <Bar options={options} data={legionData} width={600} height={600}/>
                     </Box>
                     <Box sx={{ width: '50%' }}>
                         <Box>
@@ -354,7 +358,7 @@ export default function Chart() {
                                 Local Project Assets
                             </Body>
                         </Box>
-                        <Bar options={options} data={nonLegionData} />
+                        <Bar options={{...options, maintainAspectRatio: true, responsive: true}} data={nonLegionData} />
                     </Box>
                 </Flex>
             </Card>
