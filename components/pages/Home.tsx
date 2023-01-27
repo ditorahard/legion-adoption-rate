@@ -1,23 +1,9 @@
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    PointElement,
-    LineElement,
-    Filler,
-    Tooltip,
-    Legend
-} from 'chart.js';
-
-import { Bar, Line } from 'react-chartjs-2';
-
-import { Body, Box, Caption, Card, Flex, Heading } from 'legion-ui'
-
-import { data1 } from '../data/data'
-import * as usagesByMonth from '../data/usages_by_month.json'
-import { BookOpen, Code, Figma, Folder, Logo } from '@/components/icons';
-
+import { Body, Box, Caption, Card, Flex, Heading } from "legion-ui";
+import { Bar, Line } from "react-chartjs-2";
+import { BookOpen, Code, Figma, Folder, Logo } from "../icons";
+import * as usagesByMonth from '../../data/usages_by_month.json'
+import * as usagesByProject from '../../data/usages_by_project.json';
+import { BarElement, CategoryScale, Chart as ChartJS, Filler, Legend, LinearScale, LineElement, PointElement, Tooltip } from "chart.js";
 
 ChartJS.register(
     CategoryScale,
@@ -30,7 +16,51 @@ ChartJS.register(
     Legend
 );
 
-const options = {
+const usagesByMonthOptions = {
+    responsive: true,
+    legend: {
+        position: 'right' as const,
+    },
+};
+
+
+const labels = Object.keys(usagesByMonth).reverse().filter((v => v !== 'default'))
+
+const { legionUI, nonLegionUI } = Object.values(usagesByMonth)
+    .reverse()
+    .reduce<{ legionUI: number[], nonLegionUI: number[] }>((acc, { legionUI, nonLegionUI }) => ({
+        legionUI: legionUI === undefined ? acc.legionUI : [...acc.legionUI, legionUI],
+        nonLegionUI: nonLegionUI === undefined ? acc.nonLegionUI : [...acc.nonLegionUI, nonLegionUI]
+    })
+        , {
+            legionUI: [],
+            nonLegionUI: []
+        })
+
+const usagesByMonthChartData = {
+    labels,
+    fill: true,
+    datasets: [
+        {
+            label: 'Legion Assets',
+            data: legionUI,
+            borderColor: 'rgb(135, 91, 247)',
+            backgroundColor: 'rgba(135, 91, 247, 0.5)',
+            fill: true,
+            lineTension: 0.4,
+        },
+        {
+            label: 'Local Assets',
+            data: nonLegionUI,
+            borderColor: 'rgb(247, 144, 9)',
+            backgroundColor: 'rgba(247, 144, 9, 0.5)',
+            fill: true,
+            lineTension: 0.4
+        },
+    ],
+};
+
+const barDefaultOptions = {
     indexAxis: 'y' as const,
     elements: {
         bar: {
@@ -48,8 +78,7 @@ const options = {
     responsive: false,
 };
 
-
-const getAdaptionByType = (type: 'target' | 'homebrew') => data1
+const getAdaptionByType = (type: 'target' | 'homebrew') => usagesByProject
     .filter(x => x.type === type)
     .map(x => {
         const component = x.component;
@@ -99,51 +128,7 @@ const nonLegionData = {
     ],
 };
 
-const usagesByMonthOptions = {
-    responsive: true,
-    legend: {
-        position: 'right' as const,
-    },
-};
-
-const labels = Object.keys(usagesByMonth).reverse().filter((v => v !== 'default'))
-
-const { legionUI, nonLegionUI } = Object.values(usagesByMonth)
-    .reverse()
-    .reduce<{ legionUI: number[], nonLegionUI: number[] }>((acc, { legionUI, nonLegionUI }) => ({
-        legionUI: legionUI === undefined ? acc.legionUI : [...acc.legionUI, legionUI],
-        nonLegionUI: nonLegionUI === undefined ? acc.nonLegionUI : [...acc.nonLegionUI, nonLegionUI]
-    })
-        , {
-            legionUI: [],
-            nonLegionUI: []
-        })
-const usagesByMonthChartData = {
-    labels,
-    fill: true,
-    datasets: [
-        {
-            label: 'Legion Assets',
-            data: legionUI,
-            borderColor: 'rgb(135, 91, 247)',
-            backgroundColor: 'rgba(135, 91, 247, 0.5)',
-            fill: true,
-            lineTension: 0.4,
-        },
-        {
-            label: 'Local Assets',
-            data: nonLegionUI,
-            borderColor: 'rgb(247, 144, 9)',
-            backgroundColor: 'rgba(247, 144, 9, 0.5)',
-            fill: true,
-            lineTension: 0.4
-        },
-    ],
-};
-
-
-
-export default function Chart() {
+export default function Home() {
     return <Box bg="secondary25">
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
             <Logo />
@@ -350,7 +335,7 @@ export default function Chart() {
                                 Legion Assets
                             </Body>
                         </Box>
-                        <Bar options={options} data={legionData} width={600} height={600}/>
+                        <Bar options={barDefaultOptions} data={legionData} width={600} height={600} />
                     </Box>
                     <Box sx={{ width: '50%' }}>
                         <Box>
@@ -358,7 +343,7 @@ export default function Chart() {
                                 Local Project Assets
                             </Body>
                         </Box>
-                        <Bar options={{...options, maintainAspectRatio: true, responsive: true}} data={nonLegionData} />
+                        <Bar options={{ ...barDefaultOptions, maintainAspectRatio: true, responsive: true }} data={nonLegionData} />
                     </Box>
                 </Flex>
             </Card>

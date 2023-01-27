@@ -1,4 +1,4 @@
-export const data1 = [{ "component": "import Anchor from legion-ui", "usages": 20, "type": "target" },
+[{ "component": "import Anchor from legion-ui", "usages": 20, "type": "target" },
 { "component": "import DynamicIcon from legion-ui", "usages": 39, "type": "target" },
 { "component": "import Select from legion-ui", "usages": 1, "type": "target" },
 { "component": "import Card from legion-ui", "usages": 1, "type": "target" },
