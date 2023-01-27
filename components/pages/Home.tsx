@@ -4,6 +4,7 @@ import { BookOpen, Code, Figma, Folder, Logo } from "../icons";
 import * as usagesByMonth from '../../data/usages_by_month.json'
 import * as usagesByProject from '../../data/usages_by_project.json';
 import { BarElement, CategoryScale, Chart as ChartJS, Filler, Legend, LinearScale, LineElement, PointElement, Tooltip } from "chart.js";
+import SummaryInfo from "../Home/SummaryInfo";
 
 ChartJS.register(
     CategoryScale,
@@ -128,6 +129,33 @@ const nonLegionData = {
     ],
 };
 
+const summaryInfoList = [
+    {
+        label: 'Design Assets Website',
+        value: '28 Component',
+        icon: <Figma />
+
+    },
+    {
+        label: 'Code Assets Website',
+        value: '27 Component',
+        icon: <Code />
+
+    },
+    {
+        label: 'Documentation Assets Website',
+        value: '20 Content',
+        icon: <BookOpen />
+
+    },
+    {
+        label: 'Total Repository Usage',
+        value: '2 Repository',
+        icon: <Folder />
+
+    },
+]
+
 export default function Home() {
     return <Box bg="secondary25">
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
@@ -145,66 +173,7 @@ export default function Home() {
         {/* TODO Tab */}
         <Box p={4}>
             <Flex sx={{ gap: '24px', width: '100%' }}>
-                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
-                    <Flex sx={{ alignItems: 'center' }}>
-                        <Box>
-                            <Body size='sm_regular'>
-                                Design Assets Website
-                            </Body>
-                            <Heading size="h4">
-                                28 Component
-                            </Heading>
-                        </Box>
-                        <Box ml="auto">
-                            <Figma />
-                        </Box>
-                    </Flex>
-                </Card>
-                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
-                    <Flex sx={{ alignItems: 'center' }}>
-                        <Box>
-                            <Body size='sm_regular'>
-                                Code Assets Website
-                            </Body>
-                            <Heading size="h4">
-                                27 Component
-                            </Heading>
-                        </Box>
-                        <Box ml="auto">
-                            <Code />
-                        </Box>
-                    </Flex>
-                </Card>
-                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
-                    <Flex sx={{ alignItems: 'center' }}>
-                        <Box>
-                            <Body size='sm_regular'>
-                                Documentation Assets Website
-                            </Body>
-                            <Heading size="h4">
-                                20 Content
-                            </Heading>
-                        </Box>
-                        <Box ml="auto">
-                            <BookOpen />
-                        </Box>
-                    </Flex>
-                </Card>
-                <Card p={3} variant="bordered" sx={{ width: '24%' }}>
-                    <Flex sx={{ alignItems: 'center' }}>
-                        <Box>
-                            <Body size='sm_regular'>
-                                Total Repository Usage
-                            </Body>
-                            <Heading size="h4">
-                                2 Repository
-                            </Heading>
-                        </Box>
-                        <Box ml="auto">
-                            <Folder />
-                        </Box>
-                    </Flex>
-                </Card>
+                {summaryInfoList.map(info => <SummaryInfo key={info.label} {...info} />)}
             </Flex>
             <Flex mt="24px" sx={{ gap: '24px' }}>
                 <Card variant='bordered' p={3} sx={{ width: '24%' }}>
