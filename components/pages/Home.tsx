@@ -5,6 +5,7 @@ import * as usagesByMonth from '../../data/usages_by_month.json'
 import * as usagesByProject from '../../data/usages_by_project.json';
 import { BarElement, CategoryScale, Chart as ChartJS, Filler, Legend, LinearScale, LineElement, PointElement, Tooltip } from "chart.js";
 import SummaryInfo from "../Home/SummaryInfo";
+import AssetAdoption from "../Home/AssetAdoption";
 
 ChartJS.register(
     CategoryScale,
@@ -156,6 +157,29 @@ const summaryInfoList = [
     },
 ]
 
+const adoptionEachProjects = [
+    {
+        label: 'Logee Port Repo',
+        value: 0
+    },
+    {
+        label: 'QIP Website Repo',
+        value: 0
+    },
+    {
+        label: 'Logee Order Repo',
+        value: 0
+    },
+    {
+        label: 'Agree Mart Website',
+        value: 0
+    },
+    {
+        label: 'MyTens Website',
+        value: 0
+    },
+]
+
 export default function Home() {
     return <Box bg="secondary25">
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
@@ -176,100 +200,7 @@ export default function Home() {
                 {summaryInfoList.map(info => <SummaryInfo key={info.label} {...info} />)}
             </Flex>
             <Flex mt="24px" sx={{ gap: '24px' }}>
-                <Card variant='bordered' p={3} sx={{ width: '24%' }}>
-                    <Body size="lg_bold">
-                        Assets Adoption
-                    </Body>
-                    <Box>
-                        <Body size="sm_regular">
-                            Total of components adoption in projects
-                        </Body>
-                    </Box>
-                    <Box mt={3} >
-                        <Body size="lg_bold">
-                            ?%
-                        </Body>
-                    </Box>
-                    <Box bg="#DDE2EF" sx={{
-                        position: 'relative',
-                        height: '4px',
-                        borderRadius: '20px',
-                        overflow: 'hidden',
-                    }}>
-                        <Flex
-                            role="progressbar"
-                            aria-valuemax={100}
-                            aria-valuemin={0}
-                            aria-valuenow={80}
-                            aria-label="Assets Coverage"
-                            bg="success500"
-                            sx={{
-                                width: '50%',
-                                borderRadius: '20px',
-                                position: 'absolute',
-                                top: 0,
-                                bottom: 0,
-                                left: 0,
-                                height: '100%',
-                                justifyContent: 'center',
-                                alignItems: 'center'
-                            }}
-                        />
-
-                    </Box>
-                    <Box mt={"24px"} >
-                        <Body size="lg_bold">
-                            Leaderboard Project
-                        </Body>
-                    </Box>
-                    <Box >
-                        <Body size="sm_regular">
-                            Top leader of adoption legion assets
-                        </Body>
-                    </Box>
-                    <Flex mt="24px" sx={{ flexDirection: 'column', gap: '16px' }}>
-                        <Flex>
-                            <Body size="sm_regular">
-                                Logee Port Repo
-                            </Body>
-                            <Body size="sm_bold" ml="auto">
-                                ?%
-                            </Body>
-                        </Flex>
-                        <Flex>
-                            <Body size="sm_regular">
-                                QIP Website Repo
-                            </Body>
-                            <Body size="sm_bold" ml="auto">
-                                ?%
-                            </Body>
-                        </Flex>
-                        <Flex>
-                            <Body size="sm_regular">
-                                Logee Order Repo
-                            </Body>
-                            <Body size="sm_bold" ml="auto">
-                                ?%
-                            </Body>
-                        </Flex>
-                        <Flex>
-                            <Body size="sm_regular">
-                                Agree Mart Website
-                            </Body>
-                            <Body size="sm_bold" ml="auto">
-                                ?%
-                            </Body>
-                        </Flex>
-                        <Flex>
-                            <Body size="sm_regular">
-                                MyTens Website
-                            </Body>
-                            <Body size="sm_bold" ml="auto">
-                                ?%
-                            </Body>
-                        </Flex>
-                    </Flex>
-                </Card>
+                <AssetAdoption componentPercentage={0} adoptionEachProjects={adoptionEachProjects} />
                 <Card variant='bordered' p={3} sx={{ width: '75%' }}>
                     <Box>
                         <Body size="lg_bold" sx={{ display: 'block' }}>
@@ -319,3 +250,4 @@ export default function Home() {
         </Box>
     </Box >
 }
+
