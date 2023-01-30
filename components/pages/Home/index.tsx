@@ -1,11 +1,11 @@
 import { Body, Box, Caption, Card, Flex, Heading } from "legion-ui";
 import { Bar, Line } from "react-chartjs-2";
-import { BookOpen, Code, Figma, Folder, Logo } from "../icons";
-import * as usagesByMonth from '../../data/usages_by_month.json'
-import * as usagesByProject from '../../data/usages_by_project.json';
+import { BookOpen, Code, Figma, Folder, Logo } from "../../icons";
+import * as usagesByMonth from '../../../data/usages_by_month.json'
+import * as usagesByProject from '../../../data/usages_by_project.json';
 import { BarElement, CategoryScale, Chart as ChartJS, Filler, Legend, LinearScale, LineElement, PointElement, Tooltip } from "chart.js";
-import SummaryInfo from "../Home/SummaryInfo";
-import AssetAdoption from "../Home/AssetAdoption";
+import SummaryInfo from "./SummaryInfo";
+import AssetAdoption from "./AssetAdoption";
 
 ChartJS.register(
     CategoryScale,
