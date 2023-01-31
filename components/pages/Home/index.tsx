@@ -1,12 +1,13 @@
-import { Anchor, Body, Box, Button, Caption, Card, Dropdown, DynamicIcon, Flex, Heading, Select } from "legion-ui";
-import { Bar, Line } from "react-chartjs-2";
+import { Body, Box, Caption, Card, Flex, Heading, Select } from "legion-ui";
+import { Bar } from "react-chartjs-2";
 import { BookOpen, Code, Figma, Folder, Logo } from "../../icons";
 import * as usagesByMonth from '../../../data/usages_by_month.json'
-import * as usagesByProject from '../../../data/usages_by_project.json';
+import { usagesByProject } from '../../../data/usagesByProject';
+import type { Project } from '../../../data/usagesByProject';
 import { BarElement, CategoryScale, Chart as ChartJS, Filler, Legend, LinearScale, LineElement, PointElement, Tooltip } from "chart.js";
 import SummaryInfo from "./SummaryInfo";
 import AssetAdoption from "./AssetAdoption";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import DesignSystemAdoption from "./DesignSystemAdoption";
 
 ChartJS.register(
@@ -74,55 +75,27 @@ const barDefaultOptions = {
     responsive: false,
 };
 
-const getAdaptionByType = (type: 'target' | 'homebrew') => usagesByProject
-    .filter(x => x.type === type)
-    .map(x => {
-        const component = x.component;
-        const match = component.startsWith("component") ? component.match(/^component\s*(.*)/) : component.match(/^import\s*(.*?)\s/);
-        return {
-            ...x,
-            component: match ? match[1] : '',
-        };
-    })
-    .sort((a, b) => b.usages - a.usages)
+const getAdaptionByType = (type: 'target' | 'homebrew', project: Project) =>
+    usagesByProject[project]
+        .filter(x => x.type === type)
+        .map(x => {
+            const component = x.component;
+            const match = component.startsWith("component") ? component.match(/^component\s*(.*)/) : component.match(/^import\s*(.*?)\s/);
+            return {
+                ...x,
+                component: match ? match[1] : '',
+            };
+        })
+        .sort((a, b) => b.usages - a.usages)
 
-const adaptionDataToChartData = (type: 'target' | 'homebrew') =>
-    getAdaptionByType(type).reduce<{ labels: string[], usages: number[] }>((acc, { component, usages }) => {
-        return { labels: [...acc.labels, component], usages: [...acc.usages, usages] }
+
+const MAX_COMPONENT_LENGTH = 17;
+
+const adaptionDataToChartData = (type: 'target' | 'homebrew', project: Project) =>
+    getAdaptionByType(type, project).reduce<{ labels: string[], usages: number[] }>((acc, { component, usages }) => {
+        const label = component.length < MAX_COMPONENT_LENGTH ? component :  component.substring(0,17) + '...'
+        return { labels: [...acc.labels, label], usages: [...acc.usages, usages] }
     }, { labels: [], usages: [] })
-
-const legionUsages =
-    adaptionDataToChartData('target')
-
-const nonLegionUsages =
-    adaptionDataToChartData('homebrew')
-
-const legionData = {
-    labels: legionUsages.labels,
-    datasets: [
-        {
-            label: 'Legion Assets',
-            data: legionUsages.usages,
-            borderColor: 'rgb(135,91,247)',
-            backgroundColor: 'rgb(135,91,247)',
-            categoryPercentage: 1,
-            barPercentage: 0.8,
-            barThickness: 16
-        },
-    ],
-};
-
-const nonLegionData = {
-    labels: nonLegionUsages.labels,
-    datasets: [
-        {
-            label: 'Local Assets',
-            data: nonLegionUsages.usages,
-            borderColor: 'rgb(247,144,9)',
-            backgroundColor: 'rgb(247,144,9)',
-        },
-    ],
-};
 
 const summaryInfoList = [
     {
@@ -175,19 +148,47 @@ const adoptionEachProjects = [
 ]
 
 type SelectOption = {
-    value: string;
+    value: Project;
     label: JSX.Element
 }
 
-const projects = [
+const projects: SelectOption[] = [
     { value: "all", label: <Body color="tertiary500" size="sm_regular">All Repository Project</Body> },
-    { value: "logee_port", label: <Body color="tertiary500" size="sm_regular">Logee Port</Body> },
-    { value: "logee_order", label: <Body color="tertiary500" size="sm_regular">Logee Order</Body> },
+    { value: "logeePort", label: <Body color="tertiary500" size="sm_regular">Logee Port</Body> },
+    { value: "logeeOrder", label: <Body color="tertiary500" size="sm_regular">Logee Order</Body> },
 ]
 
 
 export default function Home() {
     const [selectedProject, setProjectSelector] = useState(projects[0]);
+    const legionUsages = useMemo(() => adaptionDataToChartData('target', selectedProject.value), [selectedProject])
+    const nonLegionUsages = useMemo(() => adaptionDataToChartData('homebrew', selectedProject.value), [selectedProject])
+    const legionData = {
+        labels: legionUsages.labels,
+        datasets: [
+            {
+                label: 'Legion Assets',
+                data: legionUsages.usages,
+                borderColor: 'rgb(135,91,247)',
+                backgroundColor: 'rgb(135,91,247)',
+                categoryPercentage: 1,
+                barPercentage: 0.8,
+                barThickness: 16
+            },
+        ],
+    };
+
+    const nonLegionData = {
+        labels: nonLegionUsages.labels,
+        datasets: [
+            {
+                label: 'Local Assets',
+                data: nonLegionUsages.usages,
+                borderColor: 'rgb(247,144,9)',
+                backgroundColor: 'rgb(247,144,9)',
+            },
+        ],
+    };
     const onSetProjectSelector = (selectedProject: SelectOption) => setProjectSelector(selectedProject)
     return <Box bg="secondary25">
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
@@ -239,7 +240,10 @@ export default function Home() {
                                 Legion Assets
                             </Body>
                         </Box>
-                        <Bar options={barDefaultOptions} data={legionData} width={600} height={600} />
+                        <Bar
+                            options={barDefaultOptions}
+                            data={legionData}
+                            width={600} height={legionUsages.usages.length * 28} />
                     </Box>
                     <Box sx={{ width: '50%' }}>
                         <Box>
@@ -247,7 +251,7 @@ export default function Home() {
                                 Local Project Assets
                             </Body>
                         </Box>
-                        <Bar options={{ ...barDefaultOptions, maintainAspectRatio: true, responsive: true }} data={nonLegionData} />
+                        <Bar options={{ ...barDefaultOptions }} data={nonLegionData} width={600} height={4800} />
                     </Box>
                 </Flex>
             </Card>
