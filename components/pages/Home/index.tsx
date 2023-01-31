@@ -190,6 +190,9 @@ export default function Home() {
         ],
     };
     const onSetProjectSelector = (selectedProject: SelectOption) => setProjectSelector(selectedProject)
+    const MINMUM_BAR_WIDTH = 28;
+    const MINMUM_CHART_HEIGHT = 48;
+    const getHeightBar = (totalItems: number) => totalItems * MINMUM_BAR_WIDTH + MINMUM_CHART_HEIGHT
     return <Box bg="secondary25">
         <Flex px={4} bg='black' sx={{ height: '64px', alignItems: 'center' }}>
             <Logo />
@@ -241,9 +244,10 @@ export default function Home() {
                             </Body>
                         </Box>
                         <Bar
+                            key={selectedProject.value}
                             options={barDefaultOptions}
                             data={legionData}
-                            width={600} height={legionUsages.usages.length * 28} />
+                            width={600} height={getHeightBar(legionUsages.usages.length)} />
                     </Box>
                     <Box sx={{ width: '50%' }}>
                         <Box>
@@ -251,7 +255,7 @@ export default function Home() {
                                 Local Project Assets
                             </Body>
                         </Box>
-                        <Bar options={{ ...barDefaultOptions }} data={nonLegionData} width={600} height={4800} />
+                        <Bar key={selectedProject.value} options={{ ...barDefaultOptions }} data={nonLegionData} width={600} height={getHeightBar(nonLegionUsages.usages.length)} />
                     </Box>
                 </Flex>
             </Card>
