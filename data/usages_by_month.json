@@ -1,26 +1,54 @@
 {
+    "02-2023": {
+        "legionUI": 246,
+        "nonLegionUI": 1167
+    },
     "01-2023": {
-        "legionUI": 151,
-        "nonLegionUI": 36
+        "legionUI": 246,
+        "nonLegionUI": 1168
     },
     "12-2022": {
         "legionUI": 151,
-        "nonLegionUI": 36
+        "nonLegionUI": 1201
     },
     "11-2022": {
-        "legionUI": 89,
-        "nonLegionUI": 17
+        "legionUI": 150,
+        "nonLegionUI": 1224
     },
     "10-2022": {
         "legionUI": 11,
-        "nonLegionUI": 12
+        "nonLegionUI": 1195
     },
     "09-2022": {
         "legionUI": 3,
-        "nonLegionUI": 10
+        "nonLegionUI": 1175
     },
     "08-2022": {
+        "legionUI": 1,
+        "nonLegionUI": 1136
+    },
+    "07-2022": {
         "legionUI": 0,
-        "nonLegionUI": 7
+        "nonLegionUI": 1114
+    },
+    "06-2022": {
+        "legionUI": 0,
+        "nonLegionUI": 1084
+    },
+    "05-2022": {
+        "legionUI": 0,
+        "nonLegionUI": 1035
+    },
+    "04-2022": {
+        "legionUI": 0,
+        "nonLegionUI": 1009
+    },
+    "03-2022": {
+        "legionUI": 0,
+        "nonLegionUI": 1028
+    },
+    "02-2022": {
+        "legionUI": 0,
+        "nonLegionUI": 966
     }
 }
