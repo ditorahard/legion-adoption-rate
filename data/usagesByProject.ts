@@ -9,7 +9,7 @@ type Usage = {
     type: string
 }
 
-type UsagesByProject = Record<Project, Usage[]>;
+export type UsagesByProject = Record<Project, Usage[]>;
 
 export const usagesByProject: UsagesByProject = {
     all,

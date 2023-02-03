@@ -9,6 +9,7 @@ import SummaryInfo from "./SummaryInfo";
 import AssetAdoption from "./AssetAdoption";
 import { useMemo, useState } from "react";
 import DesignSystemAdoption from "./DesignSystemAdoption";
+import { componentKinds } from "@/legion";
 
 ChartJS.register(
     CategoryScale,
@@ -77,7 +78,8 @@ const barDefaultOptions = {
 
 const getAdaptionByType = (type: 'target' | 'homebrew', project: Project) =>
     usagesByProject[project]
-        .filter(x => x.type === type)
+        .filter(({ type: componentType }) =>
+            componentType === type)
         .map(x => {
             const component = x.component;
             const match = component.startsWith("component") ? component.match(/^component\s*(.*)/) : component.match(/^import\s*(.*?)\s/);
@@ -89,24 +91,33 @@ const getAdaptionByType = (type: 'target' | 'homebrew', project: Project) =>
         .sort((a, b) => b.usages - a.usages)
 
 
-const MAX_COMPONENT_LENGTH = 17;
-
-const adaptionDataToChartData = (type: 'target' | 'homebrew', project: Project) =>
-    getAdaptionByType(type, project).reduce<{ labels: string[], usages: number[] }>((acc, { component, usages }) => {
-        const label = component.length < MAX_COMPONENT_LENGTH ? component :  component.substring(0,17) + '...'
-        return { labels: [...acc.labels, label], usages: [...acc.usages, usages] }
+const adaptionDataToChartData = (type: 'target' | 'homebrew', project: Project) => {
+    const adaptionByType = getAdaptionByType(type, project)
+    return componentKinds.reduce<{ labels: string[], usages: number[] }>((acc, kind) => {
+        if (type === 'target') {
+            return {
+                labels: [...acc.labels, kind],
+                usages: [...acc.usages, adaptionByType.find(v => v.component === kind)?.usages ?? 0]
+            }
+        } else {
+            return {
+                labels: [...acc.labels, kind ],
+                usages: [...acc.usages, adaptionByType.find(v => v.component === kind)?.usages ?? 0]
+            }
+        }
     }, { labels: [], usages: [] })
+}
+const CODE_ASSET_WEBSITE = 27
 
 const summaryInfoList = [
     {
         label: 'Design Assets Website',
         value: '28 Component',
         icon: <Figma />
-
     },
     {
         label: 'Code Assets Website',
-        value: '27 Component',
+        value: `${CODE_ASSET_WEBSITE} Component`,
         icon: <Code />
 
     },
@@ -124,26 +135,15 @@ const summaryInfoList = [
     },
 ]
 
+
 const adoptionEachProjects = [
     {
         label: 'Logee Port Repo',
-        value: 0
-    },
-    {
-        label: 'QIP Website Repo',
-        value: 0
+        value: Math.round((adaptionDataToChartData('target', 'logeePort').labels.length / CODE_ASSET_WEBSITE) * 100) / 100
     },
     {
         label: 'Logee Order Repo',
-        value: 0
-    },
-    {
-        label: 'Agree Mart Website',
-        value: 0
-    },
-    {
-        label: 'MyTens Website',
-        value: 0
+        value: Math.round((adaptionDataToChartData('target', 'logeeOrder').labels.length / CODE_ASSET_WEBSITE) * 100) / 100
     },
 ]
 
@@ -212,7 +212,7 @@ export default function Home() {
                 {summaryInfoList.map(info => <SummaryInfo key={info.label} {...info} />)}
             </Flex>
             <Flex mt="24px" sx={{ gap: '24px' }}>
-                <AssetAdoption componentPercentage={0} adoptionEachProjects={adoptionEachProjects} />
+                <AssetAdoption componentPercentage={1.41} adoptionEachProjects={adoptionEachProjects} />
                 <DesignSystemAdoption usagesByMonthChartData={usagesByMonthChartData} />
             </Flex>
             <Card mt="24px" variant='bordered' p={3} sx={{ width: '100%' }}>
@@ -247,7 +247,8 @@ export default function Home() {
                             key={selectedProject.value}
                             options={barDefaultOptions}
                             data={legionData}
-                            width={600} height={getHeightBar(legionUsages.usages.length)} />
+                            width={600} height={getHeightBar(legionUsages.labels.length)}
+                        />
                     </Box>
                     <Box sx={{ width: '50%' }}>
                         <Box>
@@ -255,7 +256,12 @@ export default function Home() {
                                 Local Project Assets
                             </Body>
                         </Box>
-                        <Bar key={selectedProject.value} options={{ ...barDefaultOptions }} data={nonLegionData} width={600} height={getHeightBar(nonLegionUsages.usages.length)} />
+                        <Bar
+                            key={selectedProject.value}
+                            options={{ ...barDefaultOptions }}
+                            data={nonLegionData}
+                            width={600} height={getHeightBar(nonLegionUsages.labels.length)}
+                        />
                     </Box>
                 </Flex>
             </Card>

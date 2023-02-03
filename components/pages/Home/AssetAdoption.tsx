@@ -22,7 +22,7 @@ export default function AssetAdoption({ componentPercentage, adoptionEachProject
         </Box>
         <Box mt={3}>
             <Body size="lg_bold">
-                ?%
+                {componentPercentage}%
             </Body>
         </Box>
         <Box bg="#DDE2EF" sx={{
@@ -35,11 +35,11 @@ export default function AssetAdoption({ componentPercentage, adoptionEachProject
                 role="progressbar"
                 aria-valuemax={100}
                 aria-valuemin={0}
-                aria-valuenow={80}
+                aria-valuenow={1.41}
                 aria-label="Assets Coverage"
                 bg="success500"
                 sx={{
-                    width: '50%',
+                    width: `${1.41}%`,
                     borderRadius: '20px',
                     position: 'absolute',
                     top: 0,

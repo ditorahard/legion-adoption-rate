@@ -1,8 +1,5 @@
-[{"component":"import BaseThemeProvider from @logee-fe/ui","usages":1,"type":"target"},
+[
 {"component":"import Button from @logee-fe/ui","usages":1,"type":"target"},
-{"component":"component AppContextProvider","usages":1,"type":"homebrew"},
-{"component":"component Suspensed","usages":1,"type":"homebrew"},
-{"component":"component function suspense(props) {     return (<React.Suspense fallback={<div />}>       <Element {...props}/>     </React.Suspense>); }","usages":1,"type":"homebrew"},
 {"component":"component DashboardAkusisi","usages":1,"type":"homebrew"},
 {"component":"component TableTransaksiConsignee","usages":5,"type":"homebrew"},
 {"component":"component AkunPpjk","usages":9,"type":"homebrew"},
