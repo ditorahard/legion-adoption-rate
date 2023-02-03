@@ -144,7 +144,7 @@ const adoptionEachProjects = [
         value: Math.round((adaptionDataToChartData('target', 'logeePort').labels.length / CODE_ASSET_WEBSITE) * 100) / 100
     },
     {
-        label: 'Logee Order Dashboard Repo',
+        label: 'Logee Port Dashboard Repo',
         value: Math.round((adaptionDataToChartData('target', 'logeeOrder').labels.length / CODE_ASSET_WEBSITE) * 100) / 100
     },
 ]
@@ -157,7 +157,7 @@ type SelectOption = {
 const projects: SelectOption[] = [
     { value: "all", label: <Body color="tertiary500" size="sm_regular">All Repository Project</Body> },
     { value: "logeePort", label: <Body color="tertiary500" size="sm_regular">Logee Port</Body> },
-    { value: "logeeOrder", label: <Body color="tertiary500" size="sm_regular">Logee Order Dashboard</Body> },
+    { value: "logeeOrder", label: <Body color="tertiary500" size="sm_regular">Logee Port Dashboard</Body> },
 ]
 
 
