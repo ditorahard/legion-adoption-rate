@@ -1,4 +1,4 @@
-import { useIsLoggedIn } from "@/auth";
+import { TOKEN, useIsLoggedIn } from "@/auth";
 import { Logo } from "@/components/icons";
 import { Formik } from "formik";
 import { Body, Box, Button, Heading, LoginPage, Textfield } from "legion-ui";
@@ -8,6 +8,7 @@ import { match, P } from "ts-pattern";
 import { v4 as uuidv4 } from "uuid";
 
 const FormInput = () => {
+  const { replace } = useRouter();
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
@@ -21,7 +22,8 @@ const FormInput = () => {
       }}
       onSubmit={(values, { setSubmitting, setErrors }) => {
         if (values.username === values.password) {
-          localStorage.setItem("_token", uuidv4());
+          localStorage.setItem(TOKEN, uuidv4());
+          replace("/");
         } else {
           setErrors({ password: "username and password do not match" });
         }
@@ -69,7 +71,6 @@ const FormInput = () => {
 export default function Login() {
   const { replace } = useRouter();
   const isLoggedIn = useIsLoggedIn();
-  console.log(isLoggedIn);
   useEffect(() => {
     if (isLoggedIn) {
       replace("/");
