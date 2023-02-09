@@ -30,7 +30,7 @@ const FormInput = () => {
         setSubmitting(false);
       }}
     >
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+      {({ errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
           <Box color={"black"}>
             <Logo />
@@ -75,7 +75,7 @@ export default function Login() {
     if (isLoggedIn) {
       replace("/");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, replace]);
   return (
     isLoggedIn === false && (
       <Box bg="#F6F7FC">

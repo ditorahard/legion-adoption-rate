@@ -11,7 +11,7 @@ export default function Home() {
     if (isLoggedIn === false) {
       replace("/login");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, replace]);
   return isLoggedIn && (
     <>
       <Head>
