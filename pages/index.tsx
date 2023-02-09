@@ -1,8 +1,18 @@
-import Head from 'next/head'
-import HomePage from '@/components/pages/Home'
+import Head from "next/head";
+import HomePage from "@/components/pages/Home";
+import { useIsLoggedIn } from "@/auth";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  return (
+  const isLoggedIn = useIsLoggedIn();
+  const { replace } = useRouter();
+  useEffect(() => {
+    if (isLoggedIn === false) {
+      replace("/login");
+    }
+  }, [isLoggedIn]);
+  return isLoggedIn && (
     <>
       <Head>
         <title>Legion Adaption Rate</title>
@@ -14,5 +24,5 @@ export default function Home() {
         <HomePage />
       </main>
     </>
-  )
+  );
 }
