@@ -102,27 +102,15 @@ const adaptionDataToChartData = (type: "target" | "homebrew", project: Project) 
   const adaptionByType = getAdaptionByType(type, project);
   return componentKinds.reduce<{ labels: string[]; usages: number[] }>(
     (acc, kind) => {
-      if (type === "target") {
-        return {
-          labels: [...acc.labels, kind],
-          usages: [
-            ...acc.usages,
-            adaptionByType.reduce((acc, current) => {
-              return current.component === kind ? acc + current.usages : acc;
-            }, 0),
-          ],
-        };
-      } else {
-        return {
-          labels: [...acc.labels, kind],
-          usages: [
-            ...acc.usages,
-            adaptionByType.reduce((acc, current) => {
-              return current.component === kind ? acc + current.usages : acc;
-            }, 0),
-          ],
-        };
-      }
+      return {
+        labels: [...acc.labels, kind],
+        usages: [
+          ...acc.usages,
+          adaptionByType.reduce((acc, current) => {
+            return current.component === kind ? acc + current.usages : acc;
+          }, 0),
+        ],
+      };
     },
     { labels: [], usages: [] }
   );
