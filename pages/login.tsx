@@ -1,3 +1,4 @@
+import { useIsLoggedIn } from "@/auth";
 import { Logo } from "@/components/icons";
 import { Formik } from "formik";
 import { Body, Box, Button, Heading, LoginPage, Textfield } from "legion-ui";
@@ -67,22 +68,23 @@ const FormInput = () => {
 
 export default function Login() {
   const { replace } = useRouter();
-  const [showPage, setShowPage] = useState(false);
+  const isLoggedIn = useIsLoggedIn();
+  console.log(isLoggedIn);
   useEffect(() => {
-    if (window?.localStorage?.getItem("auth")) {
+    if (isLoggedIn) {
       replace("/");
-    } else {
-      setShowPage(true);
     }
-  }, []);
-  return showPage ? (
-    <Box bg="#F6F7FC">
-      <LoginPage
-        background="/images//bg_login.png"
-        formPosition="left"
-        logo="/images/logo.svg"
-        form={<FormInput />}
-      />
-    </Box>
-  ) : undefined;
+  }, [isLoggedIn]);
+  return (
+    isLoggedIn === false && (
+      <Box bg="#F6F7FC">
+        <LoginPage
+          background="/images//bg_login.png"
+          formPosition="left"
+          logo="/images/logo.svg"
+          form={<FormInput />}
+        />
+      </Box>
+    )
+  );
 }
