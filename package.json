@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare:data": "ts-node scripts/index.ts > data/usages_by_month.json"
+    "prepare:data": "ts-node src/scripts/index.ts > src/data/usages_by_month.json"
   },
   "dependencies": {
     "@next/font": "13.1.2",
@@ -17,7 +17,6 @@
     "@types/react-dom": "18.0.10",
     "chart.js": "^4.1.2",
     "dayjs": "^1.11.7",
-    "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "formik": "^2.2.9",
     "legion-ui": "^1.0.28",
@@ -31,6 +30,10 @@
   },
   "devDependencies": {
     "@types/uuid": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-plugin-react": "^7.32.2",
     "ts-node": "^10.9.1"
   }
 }
