@@ -1,6 +1,8 @@
 import { Logo } from "@/components/icons";
 import { Formik } from "formik";
 import { Body, Box, Button, Heading, LoginPage, Textfield } from "legion-ui";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { match, P } from "ts-pattern";
 import { v4 as uuidv4 } from "uuid";
 
@@ -64,7 +66,16 @@ const FormInput = () => {
 };
 
 export default function Login() {
-  return (
+  const { replace } = useRouter();
+  const [showPage, setShowPage] = useState(false);
+  useEffect(() => {
+    if (window?.localStorage?.getItem("auth")) {
+      replace("/");
+    } else {
+      setShowPage(true);
+    }
+  }, []);
+  return showPage ? (
     <Box bg="#F6F7FC">
       <LoginPage
         background="/images//bg_login.png"
@@ -73,5 +84,5 @@ export default function Login() {
         form={<FormInput />}
       />
     </Box>
-  );
+  ) : undefined;
 }
