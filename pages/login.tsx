@@ -2,31 +2,27 @@ import { Logo } from "@/components/icons";
 import { Formik } from "formik";
 import { Body, Box, Button, Heading, LoginPage, Textfield } from "legion-ui";
 import { match, P } from "ts-pattern";
-
-const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-const isValidEmail = (email: string): boolean => emailRegex.test(email);
+import { v4 as uuidv4 } from "uuid";
 
 const FormInput = () => {
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ username: "", password: "" }}
       validate={(values) => {
-        return match<{ email: string; password: string }, { email?: string; password?: string }>(values)
-          .with({ email: "", password: "" }, () => ({ email: "Required", password: "Required" }))
-          .with({ email: "", password: P.string }, () => ({ email: "Required" }))
-          .with({ email: P.string, password: "" }, () => ({ password: "Required" }))
-          .with({ email: P.not(P.when(isValidEmail)), password: P.string }, () => ({
-            email: "Invalid email format",
-          }))
-          .with({ email: P.string, password: P.string }, () => ({}))
+        return match<{ username: string; password: string }, { username?: string; password?: string }>(values)
+          .with({ username: "", password: "" }, () => ({ username: "Required", password: "Required" }))
+          .with({ username: "", password: P.string }, () => ({ username: "Required" }))
+          .with({ username: P.string, password: "" }, () => ({ password: "Required" }))
+          .with({ username: P.string, password: P.string }, () => ({}))
           .exhaustive();
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        if (values.username === values.password) {
+          localStorage.setItem("_token", uuidv4());
+        } else {
+          setErrors({ password: "username and password do not match" });
+        }
+        setSubmitting(false);
       }}
     >
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -40,23 +36,25 @@ const FormInput = () => {
           <Body size="sm_regular">Please enter your username and password</Body>
           <Box mt={"28px"}>
             <Textfield
+              id="username"
               label="Username"
-              type="email"
               placeholder="Enter your username"
               onChange={handleChange}
               onBlur={handleBlur}
-              errorMessage={(touched.email && errors.email) || undefined}
+              errorMessage={(touched.username && errors.username) || undefined}
             />
           </Box>
           <Box>
             <Textfield
+              id="password"
               label="Password"
               type="password"
               placeholder="Enter your password"
-              errorMessage={(touched.email && errors.email) || undefined}
+              onChange={handleChange}
+              errorMessage={(touched.password && errors.password) || undefined}
             />
           </Box>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button mt={3} type="submit" disabled={isSubmitting}>
             Submit
           </Button>
         </form>
