@@ -220,10 +220,7 @@ export default function Home() {
     () => adaptionDataToChartData("homebrew", selectedProject.value),
     [selectedProject]
   );
-  const uniqueProjectComponent = useMemo(
-    () => notProvidedByLegions(selectedProject.value),
-    [selectedProject]
-  );
+  const uniqueProjectComponent = useMemo(() => notProvidedByLegions(selectedProject.value), [selectedProject]);
   const legionData = {
     labels: legionUsages.labels,
     datasets: [
@@ -268,7 +265,7 @@ export default function Home() {
   const getHeightBar = (totalItems: number) => totalItems * MINMUM_BAR_WIDTH + MINMUM_CHART_HEIGHT;
   return (
     <Box bg="secondary25">
-      <Flex px={4} bg="black" sx={{ height: "64px", alignItems: "center" }}>
+      <Flex color="white" px={4} bg="black" sx={{ height: "64px", alignItems: "center" }}>
         <Logo />
       </Flex>
 
@@ -342,20 +339,20 @@ export default function Home() {
             </Box>
           </Flex>
           <Box mt={3} sx={{ width: "100%" }}>
-              <Box>
-                <Body size="lg_bold" sx={{ display: "block" }}>
-                  Unique Project Assets
-                </Body>
-                <Divider sx={{borderColor: 'rgba(0, 0, 0, 0.15)'}}/>
-              </Box>
-              <Bar
-                key={selectedProject.value}
-                options={{ ...barDefaultOptions }}
-                data={uniqueProjectComponentData}
-                width={600}
-                height={getHeightBar(uniqueProjectComponent.labels.length)}
-              />
+            <Box>
+              <Body size="lg_bold" sx={{ display: "block" }}>
+                Unique Project Assets
+              </Body>
+              <Divider sx={{ borderColor: "rgba(0, 0, 0, 0.15)" }} />
             </Box>
+            <Bar
+              key={selectedProject.value}
+              options={{ ...barDefaultOptions }}
+              data={uniqueProjectComponentData}
+              width={600}
+              height={getHeightBar(uniqueProjectComponent.labels.length)}
+            />
+          </Box>
         </Card>
       </Box>
     </Box>
