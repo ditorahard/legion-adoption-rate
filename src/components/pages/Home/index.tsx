@@ -1,4 +1,4 @@
-import { Body, Box, Caption, Card, Flex, Heading, Select } from "legion-ui";
+import { Body, Box, Caption, Card, Divider, Flex, Heading, Select } from "legion-ui";
 import { Bar } from "react-chartjs-2";
 import { BookOpen, Code, Figma, Folder, Logo } from "../../icons";
 import * as usagesByMonth from "../../../data/usages_by_month.json";
@@ -53,7 +53,7 @@ const usagesByMonthChartData = {
       lineTension: 0.4,
     },
     {
-      label: "Local Assets",
+      label: "Non Legion Assets",
       data: nonLegionUI,
       borderColor: "rgb(247, 144, 9)",
       backgroundColor: "rgba(247, 144, 9, 0.5)",
@@ -115,6 +115,29 @@ const adaptionDataToChartData = (type: "target" | "homebrew", project: Project) 
     { labels: [], usages: [] }
   );
 };
+
+const notProvidedByLegions = (project: Project) => {
+  const componentListByProject = getAdaptionByType("homebrew", project);
+  // TODO Optimize
+  return componentListByProject.reduce<{ labels: string[]; usages: number[] }>(
+    (acc, { component }) => {
+      if (!componentKinds.find((a) => a === component)) {
+        return {
+          labels: [...acc.labels, component],
+          usages: [
+            ...acc.usages,
+            componentListByProject.reduce((acc, current) => {
+              return current.component === component ? acc + current.usages : acc;
+            }, 0),
+          ],
+        };
+      }
+      return acc;
+    },
+    { labels: [], usages: [] }
+  );
+};
+
 const CODE_ASSET_WEBSITE = 27;
 
 const summaryInfoList = [
@@ -197,6 +220,10 @@ export default function Home() {
     () => adaptionDataToChartData("homebrew", selectedProject.value),
     [selectedProject]
   );
+  const uniqueProjectComponent = useMemo(
+    () => notProvidedByLegions(selectedProject.value),
+    [selectedProject]
+  );
   const legionData = {
     labels: legionUsages.labels,
     datasets: [
@@ -216,8 +243,20 @@ export default function Home() {
     labels: nonLegionUsages.labels,
     datasets: [
       {
-        label: "Local Assets",
+        label: "Non Legion Assets",
         data: nonLegionUsages.usages,
+        borderColor: "rgb(247,144,9)",
+        backgroundColor: "rgb(247,144,9)",
+      },
+    ],
+  };
+
+  const uniqueProjectComponentData = {
+    labels: uniqueProjectComponent.labels,
+    datasets: [
+      {
+        label: "Unique Project Assets",
+        data: uniqueProjectComponent.usages,
         borderColor: "rgb(247,144,9)",
         backgroundColor: "rgb(247,144,9)",
       },
@@ -260,7 +299,7 @@ export default function Home() {
               </Box>
               <Box>
                 <Body size="sm_regular" sx={{ display: "block" }}>
-                  Design system vs local component usages across all tracked projects
+                  Design system vs non legion component usages across all tracked projects
                 </Body>
               </Box>
             </Box>
@@ -290,7 +329,7 @@ export default function Home() {
             <Box sx={{ width: "50%" }}>
               <Box>
                 <Body size="lg_bold" sx={{ display: "block" }}>
-                  Local Project Assets
+                  Non Legion Project Assets
                 </Body>
               </Box>
               <Bar
@@ -302,6 +341,21 @@ export default function Home() {
               />
             </Box>
           </Flex>
+          <Box mt={3} sx={{ width: "100%" }}>
+              <Box>
+                <Body size="lg_bold" sx={{ display: "block" }}>
+                  Unique Project Assets
+                </Body>
+                <Divider sx={{borderColor: 'rgba(0, 0, 0, 0.15)'}}/>
+              </Box>
+              <Bar
+                key={selectedProject.value}
+                options={{ ...barDefaultOptions }}
+                data={uniqueProjectComponentData}
+                width={600}
+                height={getHeightBar(uniqueProjectComponent.labels.length)}
+              />
+            </Box>
         </Card>
       </Box>
     </Box>
