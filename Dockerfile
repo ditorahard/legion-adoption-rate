@@ -6,6 +6,10 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json .npmrc ./
+
+# Setup npm config
+ARG NPM_AUTH
+RUN npm config set //nexus.playcourt.id/repository/npm-group/:_auth ${NPM_AUTH}
 RUN npm install
 
 # Rebuild the source code only when needed
