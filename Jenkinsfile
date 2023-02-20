@@ -46,7 +46,7 @@ PipelineDockerEntry([
         // sh "docker build --build-arg ARGS_NODE_BUILD=${envStage} --build-arg APP_KEY=${APP_KEY} --rm --no-cache -t ${imageTag} ."
         // def vault = new Vault()
         // vault.useDotenv()
-        // echo "${NPM_AUTH}"
+        echo "${NPM_AUTH}"
         sh "docker build --build-arg NPM_AUTH=${NPM_AUTH} --build-arg ARGS_NODE_BUILD=${envStage} --rm --no-cache -t ${imageTag} ."
     },
 
@@ -54,7 +54,7 @@ PipelineDockerEntry([
     // Pada bagian ini anda dapat mengkonfigurasi dimana service akan dideploy
     // Value dari variable ini sudah ditentukan di awal dan mohon tidak diubah tanpa komunikasi dengan tim Playcourt
     deployment: 'k3s',
-
+`
     // Post Run Script
     // Pada bagian ini anda dapat menambahkan script untuk dijalankan setelah proses pada pipeline selesai
     postrunScript: [
