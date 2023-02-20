@@ -18,8 +18,9 @@ PipelineDockerEntry([
         // Pada bagian ini anda juga dapat membuat variable dan menggunakannya pada script yang lain
 
         // contoh script untuk mengambil secret dari Vault:
-        // def vault = new Vault()
-        // APP_KEY = vault.vault('ins/itmtest/develop/example', 'APP_KEY')
+        // vault.createDotenv("dpe/legion-io/${env.BRANCH_NAME}/legion-adoption-rate")
+        NPM_AUTH = vault.vault('dpe/legion-ui/develop/legion-adoption-rate', 'NPM_AUTH')
+        echo "${NPM_AUTH}"
     },
 
     // Service Test
@@ -43,7 +44,7 @@ PipelineDockerEntry([
 
         // contoh script untuk membuat image dan menggunakan variable yang dibuat pada prerunScript
         // sh "docker build --build-arg ARGS_NODE_BUILD=${envStage} --build-arg APP_KEY=${APP_KEY} --rm --no-cache -t ${imageTag} ."
-    
+
         sh "docker build --build-arg ARGS_NODE_BUILD=${envStage} --rm --no-cache -t ${imageTag} ."
     },
 
