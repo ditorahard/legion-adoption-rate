@@ -21,7 +21,6 @@ PipelineDockerEntry([
         // vault.createDotenv("dpe/legion-io/${env.BRANCH_NAME}/legion-adoption-rate")
         def vault = new Vault()
         NPM_AUTH = vault.vault('dpe/legion-ui/develop/legion-adoption-rate', 'NPM_AUTH')
-        echo "${NPM_AUTH}"
     },
 
     // Service Test
@@ -47,6 +46,7 @@ PipelineDockerEntry([
         // sh "docker build --build-arg ARGS_NODE_BUILD=${envStage} --build-arg APP_KEY=${APP_KEY} --rm --no-cache -t ${imageTag} ."
         def vault = new Vault()
         vault.useDotenv()
+        echo "${NPM_AUTH}"
         sh "docker build --build-arg NPM_AUTH=${NPM_AUTH} --build-arg ARGS_NODE_BUILD=${envStage} --rm --no-cache -t ${imageTag} ."
     },
 
