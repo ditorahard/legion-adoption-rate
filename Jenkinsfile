@@ -47,6 +47,7 @@ PipelineDockerEntry([
         // def vault = new Vault()
         // vault.useDotenv()
         echo "${NPM_AUTH}"
+
         sh "docker build --build-arg NPM_AUTH=${NPM_AUTH} --build-arg ARGS_NODE_BUILD=${envStage} --rm --no-cache -t ${imageTag} ."
     },
 
