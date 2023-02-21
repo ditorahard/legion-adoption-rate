@@ -21,6 +21,8 @@ PipelineDockerEntry([
         // vault.createDotenv("dpe/legion-io/${env.BRANCH_NAME}/legion-adoption-rate")
         def vault = new Vault()
         NPM_AUTH = vault.vault('dpe/legion-ui/develop/legion-adoption-rate', 'NPM_AUTH')
+        echo "PRE_RUN_SCRIPT"
+        echo "${NPM_AUTH}"
     },
 
     // Service Test
