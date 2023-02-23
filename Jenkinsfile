@@ -20,8 +20,9 @@ PipelineDockerEntry([
         // contoh script untuk mengambil secret dari Vault:
         // vault.createDotenv("dpe/legion-io/${env.BRANCH_NAME}/legion-adoption-rate")
         def vault = new Vault()
-        NPM_AUTH = vault.vault('dpe/legion-ui/${env.BRANCH_NAME}/general', 'NPM_AUTH')
+        NPM_AUTH = vault.vault("dpe/legion-ui/${env.BRANCH_NAME}/general", 'NPM_AUTH')
         echo "===PRERUN_SCRIPT==="
+        echo "dpe/legion-ui/${env.BRANCH_NAME}/general"
         echo "${NPM_AUTH}"
     },
 
