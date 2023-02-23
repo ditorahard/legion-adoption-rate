@@ -56,7 +56,7 @@ PipelineDockerEntry([
     // Deployment
     // Pada bagian ini anda dapat mengkonfigurasi dimana service akan dideploy
     // Value dari variable ini sudah ditentukan di awal dan mohon tidak diubah tanpa komunikasi dengan tim Playcourt
-    deployment: 'k3s',
+    deployment: 'abc',
 
     // Post Run Script
     // Pada bagian ini anda dapat menambahkan script untuk dijalankan setelah proses pada pipeline selesai
