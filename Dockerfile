@@ -1,6 +1,6 @@
 # Install dependencies only when needed
 FROM playcourt/nodejs:16-alpine AS deps
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Install dependencies based on the preferred package manager
 COPY package.json .npmrc ./
@@ -8,12 +8,11 @@ COPY package.json .npmrc ./
 # Setup npm config
 ARG NPM_AUTH
 RUN npm config set //nexus.playcourt.id/repository/npm-group/:_auth ${NPM_AUTH}
-RUN chmod 777 /app
 RUN npm install
 
 # Rebuild the source code only when needed
 FROM playcourt/nodejs:16-alpine AS builder
-WORKDIR /app
+WORKDIR /usr/src/app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
@@ -29,7 +28,7 @@ RUN npm run build
 
 # Production image, copy all the files and run next
 FROM playcourt/nodejs:16-alpine AS runner
-WORKDIR /app
+WORKDIR /usr/src/app
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
