@@ -13,7 +13,7 @@ RUN npm install
 # Rebuild the source code only when needed
 FROM playcourt/nodejs:16-alpine AS builder
 WORKDIR /usr/src/app
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
@@ -35,15 +35,15 @@ ENV NODE_ENV production
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/public ./public
+COPY --from=builder /usr/src/app/.next ./.next
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # Disable read https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /usr/src/app/.next/static ./.next/static
 
 EXPOSE 3000
 
