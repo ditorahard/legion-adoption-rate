@@ -165,6 +165,12 @@ const summaryInfoList = [
 
 const adoptionEachProjects = [
   {
+    label: "Agree Market",
+    value:
+      Math.round((adaptionDataToChartData("target", "agreeMarket").labels.length / CODE_ASSET_WEBSITE) * 100) /
+      100,
+  },
+  {
     label: "Logee Port Repo",
     value:
       Math.round((adaptionDataToChartData("target", "logeePort").labels.length / CODE_ASSET_WEBSITE) * 100) /
@@ -189,6 +195,14 @@ const projects: SelectOption[] = [
     label: (
       <Body color="tertiary500" size="sm_regular">
         All Repository Project
+      </Body>
+    ),
+  },
+  {
+    value: "agreeMarket",
+    label: (
+      <Body color="tertiary500" size="sm_regular">
+        Agree Market
       </Body>
     ),
   },

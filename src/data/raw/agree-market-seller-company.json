@@ -1,0 +1,9 @@
+[{"component":"import ThemeProvider from legion-ui","usages":1,"type":"target"},
+{"component":"import Heading from legion-ui","usages":6,"type":"target"},
+{"component":"import Body from legion-ui","usages":1,"type":"target"},
+{"component":"import Button from legion-ui","usages":2,"type":"target"},
+{"component":"import Textfield from legion-ui","usages":1,"type":"target"},
+{"component":"import DynamicIcon from legion-ui","usages":2,"type":"target"},
+{"component":"component Main","usages":1,"type":"homebrew"},
+{"component":"component ErrorBoundary","usages":1,"type":"homebrew"},
+{"component":"component LazyFallback","usages":2,"type":"homebrew"}]
