@@ -8,6 +8,7 @@ COPY package.json .npmrc ./
 # Setup npm config
 ARG NPM_AUTH
 RUN npm config set //nexus.playcourt.id/repository/npm-group/:_auth ${NPM_AUTH}
+RUN chmod 777 /app
 RUN npm install
 
 # Rebuild the source code only when needed
@@ -34,8 +35,6 @@ ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
@@ -45,9 +44,7 @@ COPY --from=builder /app/.next ./.next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # Disable read https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
+COPY --from=builder /app/.next/static ./.next/static
 
 EXPOSE 3000
 
