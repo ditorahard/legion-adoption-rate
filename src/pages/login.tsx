@@ -35,29 +35,43 @@ const FormInput = () => {
           <Box color={"black"}>
             <Logo />
           </Box>
-          <Heading size="h3" mt={"80px"}>
-            Sign In
-          </Heading>
-          <Body size="sm_regular">Please enter your username and password</Body>
-          <Box mt={"28px"}>
-            <Textfield
-              id="username"
-              label="Username"
-              placeholder="Enter your username"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errorMessage={(touched.username && errors.username) || undefined}
-            />
+          <Box sx={{ color: "#424242" }}>
+            <Heading size="h3" mt={"80px"}>
+              Sign In
+            </Heading>
           </Box>
-          <Box>
-            <Textfield
-              id="password"
-              label="Password"
-              type="password"
-              placeholder="Enter your password"
-              onChange={handleChange}
-              errorMessage={(touched.password && errors.password) || undefined}
-            />
+          <Body size="sm_regular">Please enter your username and password</Body>
+          <Box
+            mt={"28px"}
+            sx={{
+              "& span": {
+                color: "#2E3032",
+              },
+              "& input": {
+                color: "#2E3032",
+              },
+            }}
+          >
+            <Box>
+              <Textfield
+                id="username"
+                label="Username"
+                placeholder="Enter your username"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={(touched.username && errors.username) || undefined}
+              />
+            </Box>
+            <Box>
+              <Textfield
+                id="password"
+                label="Password"
+                type="password"
+                placeholder="Enter your password"
+                onChange={handleChange}
+                errorMessage={(touched.password && errors.password) || undefined}
+              />
+            </Box>
           </Box>
           <Button mt={3} type="submit" disabled={isSubmitting}>
             Submit
