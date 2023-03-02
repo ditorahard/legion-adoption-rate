@@ -284,9 +284,11 @@ export default function Home() {
       </Flex>
 
       <Box px={4} mt={"24px"}>
-        <Heading size="h5" sx={{ fontFamily: "Nunito !important" }}>
-          Hi, Welcome Back
-        </Heading>
+        <Box sx={{ color: "#424242" }}>
+          <Heading size="h5" sx={{ fontFamily: "Nunito !important" }}>
+            Hi, Welcome Back
+          </Heading>
+        </Box>
         <Caption size="lg_regular">Legion design system adoption rate analytic dashboard</Caption>
       </Box>
       {/* TODO Tab */}
