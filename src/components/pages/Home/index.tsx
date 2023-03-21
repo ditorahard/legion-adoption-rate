@@ -165,9 +165,15 @@ const summaryInfoList = [
 
 const adoptionEachProjects = [
   {
-    label: "Agree Market",
+    label: "Agree Market Seller",
     value:
-      Math.round((adaptionDataToChartData("target", "agreeMarket").labels.length / CODE_ASSET_WEBSITE) * 100) /
+      Math.round((adaptionDataToChartData("target", "agreeMarketSeller").labels.length / CODE_ASSET_WEBSITE) * 100) /
+      100,
+  },
+  {
+    label: "Agree Market Buyer",
+    value:
+      Math.round((adaptionDataToChartData("target", "agreeMarketBuyer").labels.length / CODE_ASSET_WEBSITE) * 100) /
       100,
   },
   {
@@ -190,6 +196,7 @@ type SelectOption = {
 };
 
 const projects: SelectOption[] = [
+  // Hide for temporary
   {
     value: "all",
     label: (
@@ -199,10 +206,18 @@ const projects: SelectOption[] = [
     ),
   },
   {
-    value: "agreeMarket",
+    value: "agreeMarketSeller",
     label: (
       <Body color="tertiary500" size="sm_regular">
-        Agree Market
+        Agree Market Seller
+      </Body>
+    ),
+  },
+  {
+    value: "agreeMarketBuyer",
+    label: (
+      <Body color="tertiary500" size="sm_regular">
+        Agree Market Buyer
       </Body>
     ),
   },
