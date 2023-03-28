@@ -2,7 +2,7 @@ import { Body, Box, Caption, Card, Divider, Flex, Heading, Select } from "legion
 import { Bar } from "react-chartjs-2";
 import { BookOpen, Code, Figma, Folder, Logo } from "../../icons";
 import * as usagesByMonth from "../../../data/usages_by_month.json";
-import { usagesByProject } from "../../../data/usagesByProject";
+import { usagesByProject, projects as repositories } from "../../../data/usagesByProject";
 import type { Project } from "../../../data/usagesByProject";
 import {
   BarElement,
@@ -138,7 +138,7 @@ const notProvidedByLegions = (project: Project) => {
   );
 };
 
-const CODE_ASSET_WEBSITE = 27;
+const CODE_ASSET_WEBSITE = componentKinds.length;
 
 const summaryInfoList = [
   {
@@ -158,35 +158,44 @@ const summaryInfoList = [
   },
   {
     label: "Total Repository Usage",
-    value: "2 Repository",
+    value: `${repositories.length} Repository`,
     icon: <Folder />,
   },
 ];
 
+const getAdoptionRateByProject = (project: Project) => {
+  const legionComponentKindThatUsed = adaptionDataToChartData("target", project).labels.length
+  console.log({
+    labels: adaptionDataToChartData("target", project).labels,
+    notProvided: notProvidedByLegions(project).labels
+  })
+  return Math.round(
+    (legionComponentKindThatUsed /
+      (legionComponentKindThatUsed + notProvidedByLegions(project).labels.length)) *
+      100
+  );
+}
+
 const adoptionEachProjects = [
   {
     label: "Agree Market Seller",
-    value:
-      Math.round((adaptionDataToChartData("target", "agreeMarketSeller").labels.length / CODE_ASSET_WEBSITE) * 100) /
-      100,
+    value: getAdoptionRateByProject('agreeMarketSeller')
   },
   {
     label: "Agree Market Buyer",
-    value:
-      Math.round((adaptionDataToChartData("target", "agreeMarketBuyer").labels.length / CODE_ASSET_WEBSITE) * 100) /
-      100,
+    value: getAdoptionRateByProject('agreeMarketBuyer')
   },
   {
     label: "Logee Port Repo",
-    value:
-      Math.round((adaptionDataToChartData("target", "logeePort").labels.length / CODE_ASSET_WEBSITE) * 100) /
-      100,
+    value: getAdoptionRateByProject('logeePort')
   },
   {
     label: "Logee Port Dashboard Repo",
-    value:
-      Math.round((adaptionDataToChartData("target", "logeeOrder").labels.length / CODE_ASSET_WEBSITE) * 100) /
-      100,
+    value: getAdoptionRateByProject('logeeOrder')
+  },
+  {
+    label: "Logee Truck Dashboard User Repo",
+    value: getAdoptionRateByProject('logeeTruck')
   },
 ];
 
@@ -234,6 +243,14 @@ const projects: SelectOption[] = [
     label: (
       <Body color="tertiary500" size="sm_regular">
         Logee Port Dashboard
+      </Body>
+    ),
+  },
+  {
+    value: "logeeTruck",
+    label: (
+      <Body color="tertiary500" size="sm_regular">
+        Logee Truck Dashboard
       </Body>
     ),
   },
@@ -292,6 +309,12 @@ export default function Home() {
   const MINMUM_BAR_WIDTH = 28;
   const MINMUM_CHART_HEIGHT = 48;
   const getHeightBar = (totalItems: number) => totalItems * MINMUM_BAR_WIDTH + MINMUM_CHART_HEIGHT;
+
+  const selectedAdoptionRatePercentage = (project: Project) => {
+    if (project !== 'all') return getAdoptionRateByProject(project)
+    return repositories.reduce((acc, repo) => acc + getAdoptionRateByProject(repo), 0) / repositories.length;
+  }
+
   return (
     <Box bg="secondary25">
       <Flex color="white" px={4} bg="black" sx={{ height: "64px", alignItems: "center" }}>
@@ -314,7 +337,7 @@ export default function Home() {
           ))}
         </Flex>
         <Flex mt="24px" sx={{ gap: "24px" }}>
-          <AssetAdoption componentPercentage={1.41} adoptionEachProjects={adoptionEachProjects} />
+          <AssetAdoption componentPercentage={selectedAdoptionRatePercentage(selectedProject.value)} adoptionEachProjects={adoptionEachProjects} />
           <DesignSystemAdoption usagesByMonthChartData={usagesByMonthChartData} />
         </Flex>
         <Card mt="24px" variant="bordered" p={3} sx={{ width: "100%" }}>

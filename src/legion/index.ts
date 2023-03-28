@@ -1,3 +1,4 @@
+
 const componentKinds = [
 'Accordion',
 'Alert',
@@ -30,7 +31,7 @@ const componentKinds = [
 'Radio',
 'Select',
 // TODO update sidebar
-'SidebarWrapper',
+'SidebarNavLink',
 'Spinner',
 'Switch',
 'TabBar',
