@@ -14,7 +14,7 @@ export default function SummaryInfo({label, value, icon}: Props) {
                 <Body size='sm_regular'>
                     {label}
                 </Body>
-                <Heading size="h4">
+                <Heading size="h4" color="tertiary800">
                     {value}
                 </Heading>
             </Box>
