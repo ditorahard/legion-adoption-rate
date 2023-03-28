@@ -35,11 +35,11 @@ export default function AssetAdoption({ componentPercentage, adoptionEachProject
                 role="progressbar"
                 aria-valuemax={100}
                 aria-valuemin={0}
-                aria-valuenow={1.41}
+                aria-valuenow={componentPercentage}
                 aria-label="Assets Coverage"
                 bg="success500"
                 sx={{
-                    width: `${1.41}%`,
+                    width: `${componentPercentage}%`,
                     borderRadius: '20px',
                     position: 'absolute',
                     top: 0,
