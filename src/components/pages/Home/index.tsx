@@ -307,8 +307,10 @@ export default function Home() {
 
   const selectedAdoptionRatePercentage = (project: Project) => {
     if (project !== 'all') return getAdoptionRateByProject(project)
-    return (
-      repositories.reduce<number>((acc, repo) => acc + getAdoptionRateByProject(repo), 0) / repositories.length
+    return parseFloat(
+      (
+        repositories.reduce((acc, repo) => acc + getAdoptionRateByProject(repo), 0) / repositories.length
+      ).toFixed(2)
     );
   }
 
