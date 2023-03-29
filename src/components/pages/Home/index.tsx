@@ -165,14 +165,9 @@ const summaryInfoList = [
 
 const getAdoptionRateByProject = (project: Project) => {
   const legionComponentKindThatUsed = adaptionDataToChartData("target", project).usages.filter(usage => usage > 0).length
-  console.log({
-    project,
-    legionComponentKindThatUsed,
-    notProvided: notProvidedByLegions(project).labels
-  })
-  return ((legionComponentKindThatUsed /
+  return parseFloat(((legionComponentKindThatUsed /
       (legionComponentKindThatUsed + notProvidedByLegions(project).labels.length)) *
-      100).toFixed(2)
+      100).toFixed(2))
   ;
 }
 
@@ -312,7 +307,9 @@ export default function Home() {
 
   const selectedAdoptionRatePercentage = (project: Project) => {
     if (project !== 'all') return getAdoptionRateByProject(project)
-    return repositories.reduce((acc, repo) => acc + getAdoptionRateByProject(repo), 0) / repositories.length;
+    return (
+      repositories.reduce<number>((acc, repo) => acc + getAdoptionRateByProject(repo), 0) / repositories.length
+    );
   }
 
   return (
