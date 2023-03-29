@@ -164,16 +164,16 @@ const summaryInfoList = [
 ];
 
 const getAdoptionRateByProject = (project: Project) => {
-  const legionComponentKindThatUsed = adaptionDataToChartData("target", project).labels.length
+  const legionComponentKindThatUsed = adaptionDataToChartData("target", project).usages.filter(usage => usage > 0).length
   console.log({
-    labels: adaptionDataToChartData("target", project).labels,
+    project,
+    legionComponentKindThatUsed,
     notProvided: notProvidedByLegions(project).labels
   })
-  return Math.round(
-    (legionComponentKindThatUsed /
+  return ((legionComponentKindThatUsed /
       (legionComponentKindThatUsed + notProvidedByLegions(project).labels.length)) *
-      100
-  );
+      100).toFixed(2)
+  ;
 }
 
 const adoptionEachProjects = [
