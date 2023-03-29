@@ -143,7 +143,7 @@ const CODE_ASSET_WEBSITE = componentKinds.length;
 const summaryInfoList = [
   {
     label: "Design Assets Website",
-    value: `${CODE_ASSET_WEBSITE} Component`,
+    value: `31 Component`,
     icon: <Figma />,
   },
   {
