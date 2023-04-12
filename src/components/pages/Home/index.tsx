@@ -78,6 +78,10 @@ const barDefaultOptions = {
     },
     x: {
       max: 35,
+      title: {
+        text: "usages",
+        display: true
+      }
     },
   },
   responsive: false,
