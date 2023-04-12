@@ -79,7 +79,7 @@ const barDefaultOptions = {
     x: {
       max: 35,
       title: {
-        text: "usages",
+        text: "Usages",
         display: true
       }
     },
