@@ -169,10 +169,9 @@ const summaryInfoList = [
 
 const getAdoptionRateByProject = (project: Project) => {
   const legionComponentKindThatUsed = adaptionDataToChartData("target", project).usages.filter(usage => usage > 0).length
+  const nonLegionComponentKindThatUsed = adaptionDataToChartData("homebrew", project).usages.filter(usage => usage > 0).length
   return parseFloat(((legionComponentKindThatUsed /
-      (legionComponentKindThatUsed + notProvidedByLegions(project).labels.length)) *
-      100).toFixed(2))
-  ;
+      (legionComponentKindThatUsed + nonLegionComponentKindThatUsed) * 100).toFixed(2)));
 }
 
 const adoptionEachProjects = [
@@ -196,7 +195,7 @@ const adoptionEachProjects = [
     label: "Logee Truck Dashboard User Repo",
     value: getAdoptionRateByProject('logeeTruck')
   },
-];
+].sort((first, next) => next.value - first.value);
 
 type SelectOption = {
   value: Project;
