@@ -7,7 +7,7 @@ COPY package.json .npmrc ./
 
 # Setup npm config
 ARG NPM_AUTH
-RUN npm config set //nexus.playcourt.id/repository/npm-group/:_auth ${NPM_AUTH}
+RUN npm config set //nexus.playcourt.id/repository/npm-group/:_auth bGVnaW9uLXdlYi1hZG1pbjphc3NlYW1lbGVtb2xt
 RUN npm install
 
 # Rebuild the source code only when needed
