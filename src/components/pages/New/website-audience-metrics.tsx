@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactApexChart from 'react-apexcharts'
+import dynamic from 'next/dynamic'
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import { HelpCircle } from 'react-feather'
 import { Card, Divider, Text, Flex, Box, Tooltip, Tabs } from '@legion-ui/core'
 
@@ -73,13 +74,6 @@ const WebsiteAudienceMetrics = () => {
       <Flex background="white" style={{borderBottom:'1px solid #D0D5DD'}}>
             <Tabs items={ItemTabs}></Tabs>
           </Flex>
-      {/* <Text as='h3' size='18px' height='28px' weight='700' color='tertiary900'>
-        Website Audience Metrics
-      </Text>
-      <Text size='14px' height='21px' margin='4px 0 0' color='#86909C'>
-        Audience to which the users belonged while on the current date range.
-      </Text> */}
-      {/* <Divider padding='12px' /> */}
       <Flex margin='0 -12px 24px -12px' padding="0 12px 0 12px">
         {CardData('Total Coverage', 'Tooltip total coverage', '60%')}
         {CardData('Scan Repo', 'Tooltip Scan Repo', '20')}
@@ -89,6 +83,7 @@ const WebsiteAudienceMetrics = () => {
       {(typeof window !== 'undefined') && series ? <ReactApexChart
         options={options}
         series={series}
+        width={"100%"}
         height={290}
         type="area"
       /> : null}

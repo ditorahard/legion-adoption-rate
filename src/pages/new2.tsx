@@ -1,18 +1,26 @@
-import React from 'react'
-import { Plus, Calendar } from 'react-feather'
-import { Box, Button, Flex, Text, Tabs } from '@legion-ui/core'
-import { DateRangePicker } from '@legion-ui/dates'
+import React, {useState, useEffect} from 'react';
+import { Plus, Calendar } from 'react-feather';
+import { Box, Button, Flex, Text, Tabs } from '@legion-ui/core';
+import { DateRangePicker } from '@legion-ui/dates';
 
 import Base from '@/components/pages/New/layouts/base';
 import WebsiteAudienceMetrics from '@/components/pages/New/website-audience-metrics'
 import BounceRate from '@/components/pages/New/bounce-rate'
 import TotalUsers from '@/components/pages/New/total-users'
 import AllSession from '@/components/pages/New/all-sessions'
-import LeaderboardTribeDTP from '@/components/pages/New/leaderboard-tribe-dtp'
-import LeaderboardLegionAssets from '@/components/pages/New/leaderboard-legion-assets'
-import SessionByChannel from '@/components/pages/New/session-by-channel'
+import LeaderboardTribeDTP from '@/components/pages/New/leaderboard-tribe-dtp';
+import LeaderboardLegionAssets from '@/components/pages/New/leaderboard-legion-assets';
+import SessionByChannel from '@/components/pages/New/session-by-channel';
 
-const WebsiteAnalytic = () => {
+
+
+const New2 = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if(!mounted) return <></>;
   return (
     <Base>
       <Flex alignX='space-between' alignY='center'>
@@ -58,4 +66,4 @@ const WebsiteAnalytic = () => {
   )
 }
 
-export default WebsiteAnalytic
+export default New2
