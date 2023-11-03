@@ -1,14 +1,43 @@
-import { TOKEN, useIsLoggedIn } from "@/auth";
+import { TOKEN, useIsLoggedIn } from "@/util/auth";
 import { Logo } from "@/components/icons";
 import { Formik } from "formik";
 import { Body, Box, Button, Heading, LoginPage, Textfield } from "legion-ui";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { match, P } from "ts-pattern";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 const FormInput = () => {
   const { replace } = useRouter();
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+ 
+  useEffect(() => {
+    
+    // fetch('/api/profile-data')
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setData(data)
+    //     setLoading(false)
+    //   })
+  }, []);
+  
+
+  async function _postLogin({username, password}: {username: string, password: string}){
+    axios.post('http://legion-tracker-api.telkom.design/api/v1/users/login', {
+      username: username,
+      password: password
+    })
+    .then(function (response) {
+      console.log(response);
+      localStorage.setItem(TOKEN, response.data.token);
+      replace("/new2");
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
@@ -21,11 +50,11 @@ const FormInput = () => {
           .exhaustive();
       }}
       onSubmit={(values, { setSubmitting, setErrors }) => {
-        if (values.username === values.password) {
-          localStorage.setItem(TOKEN, uuidv4());
-          replace("/");
+        const {username, password} = values
+        if (values.username && values.password) {
+          _postLogin({username, password})
         } else {
-          setErrors({ password: "username and password do not match" });
+          setErrors({ password: "Username and password cant be empty" });
         }
         setSubmitting(false);
       }}

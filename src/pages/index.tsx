@@ -1,6 +1,6 @@
 import Head from "next/head";
 import HomePage from "@/components/pages/Home";
-import { useIsLoggedIn } from "@/auth";
+import { useIsLoggedIn } from "@/util/auth";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
