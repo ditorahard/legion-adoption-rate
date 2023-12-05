@@ -3,78 +3,106 @@ import { ChevronRight } from 'react-feather'
 import { Anchor, Card, Divider, Flex, Table, Chip, Tabs } from '@legion-ui/core'
 import TitleTooltip from './title-tooltip'
 
-const Top5PageViews = () => {
+type LeaderboardValue = {
+  value: number,
+  platform: string
+}
+type LeaderboardLegionItem = {
+  name: string,
+  data: Array<LeaderboardValue>
+}
 
-    const LeaderboardLegionTabs = [
+type Props = {
+  leaderboardHomebrew: LeaderboardLegionItem;
+  leaderboardComponent: LeaderboardLegionItem;
+}
+
+const LeaderboardLegionAssets = (props:Props) => {
+  const {leaderboardHomebrew, leaderboardComponent} = props;
+
+  const renderLeaderboardComponent = () => {
+    return leaderboardComponent.map((item,i) => {
+      return (
+        <tr>
+         <td>{i+1}</td>
+         <td>{item.name}</td>
+         <td>{item.data.find(o => o.platform === 'Web').value}</td>
+         <td>{item.data.find(o => o.platform === 'Android').value}</td>
+         <td>{item.data.find(o => o.platform === 'iOS').value}</td>
+        </tr>
+      )
+    })
+  }
+
+  const renderLeaderboardHomebrew = () => {
+    return leaderboardHomebrew.map((item,i) => {
+      return (
+        <tr>
+          <td>{i+1}</td>
+          <td>{item.name}</td>
+         <td>{item.data.find(o => o.platform === 'Web').value}</td>
+         <td>{item.data.find(o => o.platform === 'Android').value}</td>
+         <td>{item.data.find(o => o.platform === 'iOS').value}</td>
+        </tr>
+      )
+    })
+  }
+
+    
+      const LeaderboardLegionTabs = [
         {
           key: 0,
           label: (
-            <span style={{ paddingLeft: '8px' }}>Legion Component</span>
+            <span style={{ paddingLeft: '8px' }}>Tribe Leaderboard</span>
           ),
+          children: (<Table className='table-top-5-page' striped>
+          <thead>
+            <tr>
+            <th>Rank</th>
+            <th>Component</th>
+            <th>Web</th>
+            <th>Android</th>
+            <th>iOS</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {renderLeaderboardComponent()}
+          </tbody>
+        </Table>)
         },
         {
           key: 1,
           label: (
-          <span style={{ paddingLeft: '8px' }}>Non Legion Component</span>
+          <span style={{ paddingLeft: '8px' }}>DTP Leaderboard</span>
           ),
+          children: (<Table className='table-top-5-page' striped>
+          <thead>
+            <tr>
+            <th>Rank</th>
+            <th>Component</th>
+            <th>Web</th>
+            <th>Android</th>
+            <th>iOS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {renderLeaderboardHomebrew()}
+          </tbody>
+        </Table>)
         },
       ]
+
+      console.log("leaderboardHomebrew inside", leaderboardHomebrew);
+      console.log("leaderboardComponent inside", leaderboardComponent);
 
   return (
     <Card>
       <Flex background="white" style={{borderBottom:'1px solid #D0D5DD'}} margin="0 0 12px">
         <Tabs items={LeaderboardLegionTabs}></Tabs>
       </Flex>
-      <Table className='table-top-5-page' striped>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Component</th>
-            <th>Web</th>
-            <th>Android</th>
-            <th>IOS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Button</td>
-            <td>90</td>
-            <td>70</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Typography</td>
-            <td>80</td>
-            <td>70</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Checkbox</td>
-            <td>80</td>
-            <td>70</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Text Field</td>
-            <td>80</td>
-            <td>70</td>
-            <td>40</td>            
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Dropdown</td>
-            <td>80</td>
-            <td>70</td>
-            <td>90</td>
-          </tr>
-        </tbody>
-      </Table>
     </Card>
   )
 }
 
-export default Top5PageViews
+export default LeaderboardLegionAssets

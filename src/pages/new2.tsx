@@ -12,24 +12,81 @@ import LeaderboardTribeDTP from '@/components/pages/New/leaderboard-tribe-dtp';
 import LeaderboardLegionAssets from '@/components/pages/New/leaderboard-legion-assets';
 import SessionByChannel from '@/components/pages/New/session-by-channel';
 
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 
 const New2 = () => {
+
+  const [leaderboardTribe, setLeaderboardTribe] = useState(null);
+  const [leaderboardDTP, setLeaderboardDTP] = useState(null);
+  const [leaderboardHomebrew, setLeaderboardHomebrew] = useState(null);
+  const [leaderboardComponent, setLeaderboardComponent] = useState(null);
   const [mounted, setMounted] = useState(false);
+  const {replace} = useRouter()
+
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(true)
  
   useEffect(() => {
-    fetch('/api/profile-data')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
+    if (typeof window !== 'undefined') {
+      // Perform localStorage action
+      const TOKEN = 'Bearer ' + localStorage.getItem('_token');
+      console.log('token', TOKEN);
+      axios({ method: 'get', url:'http://legion-tracker-api.telkom.design/api/v1/leaderboard/dtp?limit=5',
+      headers: {
+          'Authorization': TOKEN,}
       })
+      .then((res) =>  {
+        console.log("res Leaderboard DTP ", res.data);
+        setLeaderboardDTP(res.data.data);
+        
+      }).catch(() => {
+        localStorage.removeItem("_token");
+        replace("/login");
+      })
+      axios.get('http://legion-tracker-api.telkom.design/api/v1/leaderboard/tribe', {
+        headers: {
+          'Authorization': TOKEN,
+        }
+      })
+      .then((res) =>  {
+        console.log("Leaderboard Tribe ", res.data);
+        setLeaderboardTribe(res.data.data);
+      })
+      .catch(() => {
+        localStorage.removeItem("_token");
+        replace("/login");
+      })
+      axios.get('http://legion-tracker-api.telkom.design/api/v1/leaderboard/component/homebrew?limit=5', {
+        headers: {
+          'Authorization': TOKEN,}
+        }
+      )
+      .then((res) => {
+        console.log("Leaderboard Non Legion Component ", res.data.data);
+        setLeaderboardHomebrew(res.data.data);
+      })
+      .catch(() => {
+        localStorage.removeItem("_token");
+        replace("/login");
+      })
+      axios.get('http://legion-tracker-api.telkom.design/api/v1/leaderboard/component/legion?limit=5', {
+        headers: {
+            'Authorization': TOKEN,}
+        }
+      )
+      .then((res) =>  {
+        console.log("Leaderboard Component ", res.data.data)
+        setLeaderboardComponent(res.data.data);
+      })
+      .catch(() => {
+        localStorage.removeItem("_token");
+        replace("/login");
+      })
+    }
+    
   }, [])
 
   if(!mounted) return <></>;
@@ -60,7 +117,7 @@ const New2 = () => {
             Information adoption in projects and top leader of adoption in DTP
           </Text>
         </Box>
-        <LeaderboardTribeDTP />
+        <LeaderboardTribeDTP leaderboardDTP={leaderboardDTP || []} leaderboardTribe={leaderboardTribe || []} />
       </Box>
         <Box width='55%' padding='12px'>
         <Box padding="8px" margin="0 0 8px">
@@ -71,7 +128,7 @@ const New2 = () => {
             Repo information, assets adoption in projects and top leader of adoption in DTP
           </Text>
         </Box>
-        <LeaderboardLegionAssets />
+        <LeaderboardLegionAssets leaderboardComponent={leaderboardComponent || []} leaderboardHomebrew={leaderboardHomebrew || []}/>
         </Box>
       </Flex>
     </Base>

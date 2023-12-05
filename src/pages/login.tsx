@@ -29,12 +29,12 @@ const FormInput = () => {
       username: username,
       password: password
     })
-    .then(function (response) {
+    .then((response) => {
       console.log(response);
-      localStorage.setItem(TOKEN, response.data.token);
+      localStorage.setItem(TOKEN, response.data.data.token);
       replace("/new2");
     })
-    .catch(function (error) {
+    .catch((error)=> {
       console.log(error);
     });
   }
@@ -116,7 +116,7 @@ export default function Login() {
   const isLoggedIn = useIsLoggedIn();
   useEffect(() => {
     if (isLoggedIn) {
-      replace("/");
+      replace("/new2");
     }
   }, [isLoggedIn, replace]);
   return (
