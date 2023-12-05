@@ -76,7 +76,8 @@ const WebsiteAudienceMetrics = (props: Props) => {
     },
   }
 
-  const CardData = (title: string, tooltip: string, mount: any) => (
+  const CardData = ({title, tooltip, mount, desc} : {title: string, tooltip: string, mount: any, desc: any}) => {
+    return (
     <Box width='25%' padding='12px'>
       <Flex alignY='center'>
         <Text size='14px' height='21px' weight='700' color='tertiary900' margin='0 10px 0 0'>
@@ -84,20 +85,29 @@ const WebsiteAudienceMetrics = (props: Props) => {
         </Text>
         <Tooltip text={tooltip}><HelpCircle color='#8C8F93' size={16}/></Tooltip>
       </Flex>
+      <Box>
       <Text size='24px' height='36px' weight='700' color='tertiary900'>{mount}</Text>
+      {desc? <Text size='12px' height='18px' weight='400' color='tertiary400'>{" " + desc}</Text> : null}
+      </Box>
     </Box>
-  )
+    )
+  }
   
+  const totalCoverage = {title:'Total Coverage', tooltip:'Tooltip total coverage', mount:Math.round(coverageOverview.total_coverage) + '%', desc: null};
+  const scanRepo ={title: 'Scan Repo', tooltip: 'Tooltip Scan Repo', mount: coverageOverview.scan_repo, desc: null};
+  const needToScan = {title: 'Need to Scan', tooltip: 'Tooltip Need to Scan', mount:coverageOverview.need_to_scan, desc: 'DTP / Project'};
+  const totalAssets = {title: 'Total Assets', tooltip: 'Total Assets', mount: coverageOverview.total_assets, desc: 'Components'}
+
   return (
     <Card>
       <Flex background="white" style={{borderBottom:'1px solid #D0D5DD'}}>
             <Tabs items={ItemTabs}></Tabs>
           </Flex>
       <Flex margin='0 -12px 24px -12px' padding="0 12px 0 12px">
-        {CardData('Total Coverage', 'Tooltip total coverage', Math.round(coverageOverview.total_coverage) + '%')}
-        {CardData('Scan Repo', 'Tooltip Scan Repo', coverageOverview.scan_repo)}
-        {CardData('Need to Scan', 'Tooltip Need to Scan', coverageOverview.need_to_scan)}
-        {CardData('Total Assets', 'Total Assets', coverageOverview.total_assets)}
+        {CardData(totalCoverage)}
+        {CardData(scanRepo)}
+        {CardData(needToScan)}
+        {CardData(totalAssets)}
       </Flex>
       {(typeof window !== 'undefined') && series ? <ReactApexChart
         options={options}
