@@ -12,9 +12,9 @@ type CoverageOverview = {
 }
 
 type CoverageGraph = {
-  web: [],
-  ios: [],
-  android: []
+  web: number[],
+  ios: number[],
+  android: number[]
 }
 
 type Props = {

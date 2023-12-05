@@ -26,9 +26,9 @@ const LeaderboardLegionAssets = (props:Props) => {
         <tr>
          <td>{i+1}</td>
          <td>{item.name}</td>
-         <td>{item.data.find(o => o.platform === 'Web').value}</td>
-         <td>{item.data.find(o => o.platform === 'Android').value}</td>
-         <td>{item.data.find(o => o.platform === 'iOS').value}</td>
+         <td>{item?.data?.find(o => o.platform === 'Web')?.value}</td>
+         <td>{item?.data?.find(o => o.platform === 'Android')?.value}</td>
+         <td>{item?.data?.find(o => o.platform === 'iOS')?.value}</td>
         </tr>
       )
     })
@@ -40,9 +40,9 @@ const LeaderboardLegionAssets = (props:Props) => {
         <tr>
           <td>{i+1}</td>
           <td>{item.name}</td>
-         <td>{item.data.find(o => o.platform === 'Web').value}</td>
-         <td>{item.data.find(o => o.platform === 'Android').value}</td>
-         <td>{item.data.find(o => o.platform === 'iOS').value}</td>
+          <td>{item?.data?.find(o => o.platform === 'Web')?.value}</td>
+         <td>{item?.data?.find(o => o.platform === 'Android')?.value}</td>
+         <td>{item?.data?.find(o => o.platform === 'iOS')?.value}</td>
         </tr>
       )
     })

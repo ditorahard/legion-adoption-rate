@@ -22,8 +22,8 @@ const New2 = () => {
   const [leaderboardDTP, setLeaderboardDTP] = useState(null);
   const [leaderboardHomebrew, setLeaderboardHomebrew] = useState(null);
   const [leaderboardComponent, setLeaderboardComponent] = useState(null);
-  const [coverageOverview, setCoverageOverview] = useState(null)
-  const [coverageGraph, setCoverageGraph] = useState(null);
+  const [coverageOverview, setCoverageOverview] = useState({need_to_scan: 0, scan_repo: 0, total_coverage: 0, total_assets: 0})
+  const [coverageGraph, setCoverageGraph] = useState({web: [], ios: [], android: []});
   const [mounted, setMounted] = useState(false);
   const {replace} = useRouter()
 
@@ -133,7 +133,7 @@ const New2 = () => {
       </Flex>
       <Flex margin='12px -12px'>
         <Box width='100%' padding='12px'>
-        {(typeof window !== 'undefined') && <WebsiteAudienceMetrics coverageOverview={coverageOverview || {}} coverageGraph={coverageGraph || {}} /> }
+        {(typeof window !== 'undefined') && <WebsiteAudienceMetrics coverageOverview={coverageOverview} coverageGraph={coverageGraph} /> }
         </Box>
       </Flex>
       <Flex margin='0 -12px'>
