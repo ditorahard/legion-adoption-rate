@@ -4,19 +4,38 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 import { HelpCircle } from 'react-feather'
 import { Card, Divider, Text, Flex, Box, Tooltip, Tabs } from '@legion-ui/core'
 
-const WebsiteAudienceMetrics = () => {
+type CoverageOverview = {
+  need_to_scan: number,
+  total_coverage: number,
+  scan_repo: number,
+  total_assets: number
+}
+
+type CoverageGraph = {
+  web: [],
+  ios: [],
+  android: []
+}
+
+type Props = {
+  coverageOverview: CoverageOverview,
+  coverageGraph: CoverageGraph
+}
+
+const WebsiteAudienceMetrics = (props: Props) => {
+  const {coverageGraph, coverageOverview} = props;
 
   const ItemTabs = [
     {
       key: 0,
       label: (
-        <span style={{ paddingLeft: '8px' }}>Coverage</span>
+        <span style={{ paddingLeft: '8px' }}>Adoption</span>
       ),
     },
     {
       key: 1,
       label: (
-      <span style={{ paddingLeft: '8px' }}>Component</span>
+      <span style={{ paddingLeft: '8px' }}>Coverage</span>
       ),
     },
   ]
@@ -24,15 +43,15 @@ const WebsiteAudienceMetrics = () => {
   const series = [
     {
       name: 'Website',
-      data: [400, 410, 350, 510, 790, 620, 690, 910, 480, 600, 410, 350]
+      data: coverageGraph.web
     },
     {
       name: 'Android',
-      data: [260, 370, 110, 320, 530, 220, 860, 530, 210, 130, 260, 370]
+      data: coverageGraph.android
     },
     {
       name: 'iOS',
-      data: [200, 450, 200, 400, 680, 340, 590, 800, 320, 400, 300, 290]
+      data: coverageGraph.ios
     },
   ]
 
@@ -57,7 +76,7 @@ const WebsiteAudienceMetrics = () => {
     },
   }
 
-  const CardData = (title: string, tooltip: string, mount: string) => (
+  const CardData = (title: string, tooltip: string, mount: any) => (
     <Box width='25%' padding='12px'>
       <Flex alignY='center'>
         <Text size='14px' height='21px' weight='700' color='tertiary900' margin='0 10px 0 0'>
@@ -75,10 +94,10 @@ const WebsiteAudienceMetrics = () => {
             <Tabs items={ItemTabs}></Tabs>
           </Flex>
       <Flex margin='0 -12px 24px -12px' padding="0 12px 0 12px">
-        {CardData('Total Coverage', 'Tooltip total coverage', '60%')}
-        {CardData('Scan Repo', 'Tooltip Scan Repo', '20')}
-        {CardData('Need to Scan', 'Tooltip Need to Scan', '5')}
-        {CardData('Sessions', 'Total Usage', '8,312')}
+        {CardData('Total Coverage', 'Tooltip total coverage', Math.round(coverageOverview.total_coverage) + '%')}
+        {CardData('Scan Repo', 'Tooltip Scan Repo', coverageOverview.scan_repo)}
+        {CardData('Need to Scan', 'Tooltip Need to Scan', coverageOverview.need_to_scan)}
+        {CardData('Total Assets', 'Total Assets', coverageOverview.total_assets)}
       </Flex>
       {(typeof window !== 'undefined') && series ? <ReactApexChart
         options={options}

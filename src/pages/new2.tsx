@@ -22,6 +22,8 @@ const New2 = () => {
   const [leaderboardDTP, setLeaderboardDTP] = useState(null);
   const [leaderboardHomebrew, setLeaderboardHomebrew] = useState(null);
   const [leaderboardComponent, setLeaderboardComponent] = useState(null);
+  const [coverageOverview, setCoverageOverview] = useState(null)
+  const [coverageGraph, setCoverageGraph] = useState(null);
   const [mounted, setMounted] = useState(false);
   const {replace} = useRouter()
 
@@ -85,8 +87,35 @@ const New2 = () => {
         localStorage.removeItem("_token");
         replace("/login");
       })
+
+      axios.get('http://legion-tracker-api.telkom.design/api/v1/coverage/overview', {
+        headers: {
+            'Authorization': TOKEN,}
+        }
+      )
+      .then((res) =>  {
+        console.log("Leaderboard Coverage Overview ", res.data.data)
+        setCoverageOverview(res.data.data);
+      })
+      .catch(() => {
+        localStorage.removeItem("_token");
+        replace("/login");
+      })
+
+      axios.get('http://legion-tracker-api.telkom.design/api/v1/coverage/graph', {
+        headers: {
+            'Authorization': TOKEN,}
+        }
+      )
+      .then((res) =>  {
+        console.log("Leaderboard Coverage Graph ", res.data.data)
+        setCoverageGraph(res.data.data);
+      })
+      .catch(() => {
+        localStorage.removeItem("_token");
+        replace("/login");
+      })
     }
-    
   }, [])
 
   if(!mounted) return <></>;
@@ -104,7 +133,7 @@ const New2 = () => {
       </Flex>
       <Flex margin='12px -12px'>
         <Box width='100%' padding='12px'>
-        {(typeof window !== 'undefined') && <WebsiteAudienceMetrics /> }
+        {(typeof window !== 'undefined') && <WebsiteAudienceMetrics coverageOverview={coverageOverview || {}} coverageGraph={coverageGraph || {}} /> }
         </Box>
       </Flex>
       <Flex margin='0 -12px'>

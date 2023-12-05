@@ -13,8 +13,8 @@ type LeaderboardLegionItem = {
 }
 
 type Props = {
-  leaderboardHomebrew: LeaderboardLegionItem;
-  leaderboardComponent: LeaderboardLegionItem;
+  leaderboardHomebrew: Array<LeaderboardLegionItem>;
+  leaderboardComponent: Array<LeaderboardLegionItem>;
 }
 
 const LeaderboardLegionAssets = (props:Props) => {
@@ -92,9 +92,6 @@ const LeaderboardLegionAssets = (props:Props) => {
         </Table>)
         },
       ]
-
-      console.log("leaderboardHomebrew inside", leaderboardHomebrew);
-      console.log("leaderboardComponent inside", leaderboardComponent);
 
   return (
     <Card>
