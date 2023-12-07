@@ -1,7 +1,5 @@
 import React from 'react'
-import { ChevronRight } from 'react-feather'
-import { Anchor, Card, Divider, Flex, Table, Chip, Tabs } from '@legion-ui/core'
-import TitleTooltip from './title-tooltip'
+import { Card, Flex, Table, Tabs } from '@legion-ui/core'
 
 type LeaderboardValue = {
   value: number,
@@ -23,7 +21,7 @@ const LeaderboardLegionAssets = (props:Props) => {
   const renderLeaderboardComponent = () => {
     return leaderboardComponent.map((item,i) => {
       return (
-        <tr>
+        <tr key={i}>
          <td>{i+1}</td>
          <td>{item.name}</td>
          <td>{item?.data?.find(o => o.platform === 'Web')?.value}</td>
@@ -37,7 +35,7 @@ const LeaderboardLegionAssets = (props:Props) => {
   const renderLeaderboardHomebrew = () => {
     return leaderboardHomebrew.map((item,i) => {
       return (
-        <tr>
+        <tr key={i}>
           <td>{i+1}</td>
           <td>{item.name}</td>
           <td>{item?.data?.find(o => o.platform === 'Web')?.value}</td>

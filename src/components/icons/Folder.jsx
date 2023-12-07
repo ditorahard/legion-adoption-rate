@@ -1,4 +1,4 @@
-export const Folder = (props) => {
+export const Folder = () => {
 	return (
 		<svg height="40" width="40" fill="none" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
 			<rect height="40" width="40" fill="#FFFAEB" rx="8" />

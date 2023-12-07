@@ -1,7 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react'
-import { Users, Home, Layout, File, Database, Tool, Menu } from 'react-feather'
+import { Home, Layout, Menu } from 'react-feather'
 import { Box, Sidebar, Flex, Divider, Text, Button, Avatar } from '@legion-ui/core'
-import UserSidebar from '/images/user-sidebar.svg'
 import Header from './header'
 import Footer from './footer'
 

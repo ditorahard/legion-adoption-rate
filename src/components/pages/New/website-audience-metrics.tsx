@@ -2,7 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import { HelpCircle } from 'react-feather'
-import { Card, Divider, Text, Flex, Box, Tooltip, Tabs } from '@legion-ui/core'
+import { Card, Text, Flex, Box, Tooltip, Tabs } from '@legion-ui/core'
 
 type CoverageOverview = {
   need_to_scan: number,
@@ -76,7 +76,8 @@ const WebsiteAudienceMetrics = (props: Props) => {
     },
   }
 
-  const CardData = ({title, tooltip, mount, desc} : {title: string, tooltip: string, mount: any, desc: any}) => {
+  const CardData = (// eslint-disable-next-line
+    {title, tooltip, mount, desc} : {title: string, tooltip: string, mount: any, desc: any}) => {
     return (
     <Box width='25%' padding='12px'>
       <Flex alignY='center'>

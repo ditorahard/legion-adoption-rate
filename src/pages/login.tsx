@@ -3,26 +3,15 @@ import { Logo } from "@/components/icons";
 import { Formik } from "formik";
 import { Body, Box, Button, Heading, LoginPage, Textfield } from "legion-ui";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { match, P } from "ts-pattern";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 
 const FormInput = () => {
   const { replace } = useRouter();
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(true)
- 
-  useEffect(() => {
-    
-    // fetch('/api/profile-data')
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setData(data)
-    //     setLoading(false)
-    //   })
-  }, []);
-  
+  // const [data, setData] = useState(null)
+  // const [isLoading, setLoading] = useState(true)
 
   async function _postLogin({username, password}: {username: string, password: string}){
     axios.post('http://legion-tracker-api.telkom.design/api/v1/users/login', {

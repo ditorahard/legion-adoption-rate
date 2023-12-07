@@ -1,22 +1,8 @@
 import { Button, Navbar, Image, Flex, Tabs, Text, Box, Table, Chip } from "@legion-ui/core";
-import dynamic from 'next/dynamic'
 import { useEffect, useState } from "react";
 import Footer from "@/components/pages/New/Footer";
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
-
-
-type AdoptionEachProject = {
-    label: string;
-    value: number;
-}
-
-type Props = {
-    componentPercentage: number;
-    adoptionEachProjects: AdoptionEachProject[];
-}
-
-export default function New(props: Props) {
+export default function New() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -50,34 +36,6 @@ export default function New(props: Props) {
       },
   ]
 
-  const chart = {
-    options: {
-      chart: {
-        id: "basic-bar"
-      },
-      xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-      }
-    },
-    series: [
-      {
-        name: "series-1",
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
-      }
-    ]
-  };
-  const donutChart = {
-    options: {
-      chart: {
-        id: "donut"
-      },
-      xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-      }
-    },
-    series: [23, 11, 54, 72],
-labels: ["Android", "iOS", "Website", "Others"]
-  };
 
   const adoptions = [
     { rank: 6, mass: 12.011, adoption: '80%', platform: 'Website', level: 'Automator', nonlegion: 12.011, name: 'Agree' },
@@ -92,7 +50,7 @@ labels: ["Android", "iOS", "Website", "Others"]
   <Box style={{height:'800px', backgroundColor: '#F9FAFB'}}>
     <Flex padding="10px" alignX="space-between" direction="row" background="white">
     <Box>
-      <Image src="/images/logo_2.png" width="140px" height="40px"></Image>
+      <Image alt="logo" src="/images/logo_2.png" width="140px" height="40px"></Image>
     </Box>
     <Box>  
       <Navbar items={navbarItems} />

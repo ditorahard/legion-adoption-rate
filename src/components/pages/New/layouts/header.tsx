@@ -6,7 +6,9 @@ const Logo = '/images/legion-logo.svg'
 const LogoPlain = '/images/legion-plain-logo.svg'
 
 interface HeaderProps {
+  // eslint-disable-next-line
   handleToggleSidebar: (e?: any) => void
+  // eslint-disable-next-line
   handleNavMode: (e?: any) => void
   isSidebarCollapse?: boolean
   navMode?: string

@@ -1,16 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Plus, Calendar } from 'react-feather';
-import { Box, Button, Flex, Text, Tabs } from '@legion-ui/core';
-import { DateRangePicker } from '@legion-ui/dates';
+import { Box, Flex, Text } from '@legion-ui/core';
 
 import Base from '@/components/pages/New/layouts/base';
 import WebsiteAudienceMetrics from '@/components/pages/New/website-audience-metrics'
-import BounceRate from '@/components/pages/New/bounce-rate'
-import TotalUsers from '@/components/pages/New/total-users'
-import AllSession from '@/components/pages/New/all-sessions'
 import LeaderboardTribeDTP from '@/components/pages/New/leaderboard-tribe-dtp';
 import LeaderboardLegionAssets from '@/components/pages/New/leaderboard-legion-assets';
-import SessionByChannel from '@/components/pages/New/session-by-channel';
 
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -29,7 +23,7 @@ const Index = () => {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+  }, [replace]);
  
   useEffect(() => {
     if (typeof window !== 'undefined') {

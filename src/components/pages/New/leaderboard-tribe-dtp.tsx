@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { ChevronRight } from 'react-feather'
-import { Anchor, Card, Divider, Flex, Table, Chip, Tabs } from '@legion-ui/core'
-import TitleTooltip from './title-tooltip'
+import React from 'react'
+import { Card, Flex, Table, Chip, Tabs } from '@legion-ui/core'
 
 type LeaderboardDTPItem = {
   coverage: number,
@@ -37,7 +35,7 @@ const LeaderboardTribeDTP = (props: Props) => {
     return leaderboardDTP.map((item,i) => {
       const chipColor = chipColorPicker(item.platform);
       return (
-        <tr>
+        <tr key={i}>
          <td>{i+1}</td>
           <td>{item.dtp}</td>
           <td>{Math.round(item.coverage) + '%'}</td>
@@ -49,10 +47,8 @@ const LeaderboardTribeDTP = (props: Props) => {
 
   const renderLeaderboardTribe = () => {
     return leaderboardTribe.map((item,i) => {
-      const chipColor = chipColorPicker(item.platform);
       return (
-        <tr>
-          
+        <tr key={i}>          
           <td>{i+1}</td>
           <td>{item.tribe}</td>
           <td>{Math.round(item.coverage) + '%'}</td>

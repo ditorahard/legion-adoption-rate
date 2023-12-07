@@ -15,7 +15,9 @@ const SessionByChannel = () => {
       width: 250,
       fontSize: '12px',
       horizontalAlign: 'center',
-      formatter: function (seriesName: any, opts: any): any {
+      formatter: function (
+        // eslint-disable-next-line
+        seriesName: any, opts: any): any {
         return [seriesName, '-', opts.w.globals.series[opts.seriesIndex]]
       }
     },
@@ -36,8 +38,10 @@ const SessionByChannel = () => {
               fontSize: '12px',
               color: '#4E5969',
               showAlways: true,
+              // eslint-disable-next-line
               formatter: function (w: any) {
                 const totals = w.globals.seriesTotals;
+                // eslint-disable-next-line
                 const result = totals.reduce((a: any, b: any) => a + b);
                 return result;
               }
