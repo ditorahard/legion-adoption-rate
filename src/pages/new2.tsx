@@ -137,7 +137,7 @@ const New2 = () => {
         </Box>
       </Flex>
       <Flex margin='0 -12px'>
-        <Box width='45%' padding='12px'>
+        <Box padding='12px'>
           <Box padding="8px" margin="0 0 8px">
             <Text as='h1' size='24px' height='36px' color='tertiary900' weight='700' block>
             Leaderboard Tribe & DTP
@@ -148,7 +148,7 @@ const New2 = () => {
         </Box>
         <LeaderboardTribeDTP leaderboardDTP={leaderboardDTP || []} leaderboardTribe={leaderboardTribe || []} />
       </Box>
-        <Box width='55%' padding='12px'>
+        <Box padding='12px'>
         <Box padding="8px" margin="0 0 8px">
           <Text as='h1' size='24px' height='36px' color='tertiary900' weight='700' block>
             Leaderboard Legion Assets
