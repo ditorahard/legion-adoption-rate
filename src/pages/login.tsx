@@ -14,7 +14,7 @@ const FormInput = () => {
   // const [isLoading, setLoading] = useState(true)
 
   async function _postLogin({username, password}: {username: string, password: string}){
-    axios.post('http://legion-tracker-api.telkom.design/api/v1/users/login', {
+    axios.post('https://legion-tracker-api.telkom.design/api/v1/users/login', {
       username: username,
       password: password
     })

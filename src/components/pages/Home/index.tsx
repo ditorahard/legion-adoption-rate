@@ -30,7 +30,7 @@ const Index = () => {
       // Perform localStorage action
       const TOKEN = 'Bearer ' + localStorage.getItem('_token');
       console.log('token', TOKEN);
-      axios({ method: 'get', url:'http://legion-tracker-api.telkom.design/api/v1/leaderboard/dtp?limit=5',
+      axios({ method: 'get', url:'https://legion-tracker-api.telkom.design/api/v1/leaderboard/dtp?limit=5',
       headers: {
           'Authorization': TOKEN,}
       })
@@ -42,7 +42,7 @@ const Index = () => {
         localStorage.removeItem("_token");
         replace("/login");
       })
-      axios.get('http://legion-tracker-api.telkom.design/api/v1/leaderboard/tribe', {
+      axios.get('https://legion-tracker-api.telkom.design/api/v1/leaderboard/tribe', {
         headers: {
           'Authorization': TOKEN,
         }
@@ -55,7 +55,7 @@ const Index = () => {
         localStorage.removeItem("_token");
         replace("/login");
       })
-      axios.get('http://legion-tracker-api.telkom.design/api/v1/leaderboard/component/homebrew?limit=5', {
+      axios.get('https://legion-tracker-api.telkom.design/api/v1/leaderboard/component/homebrew?limit=5', {
         headers: {
           'Authorization': TOKEN,}
         }
@@ -68,7 +68,7 @@ const Index = () => {
         localStorage.removeItem("_token");
         replace("/login");
       })
-      axios.get('http://legion-tracker-api.telkom.design/api/v1/leaderboard/component/legion?limit=5', {
+      axios.get('https://legion-tracker-api.telkom.design/api/v1/leaderboard/component/legion?limit=5', {
         headers: {
             'Authorization': TOKEN,}
         }
@@ -82,7 +82,7 @@ const Index = () => {
         replace("/login");
       })
 
-      axios.get('http://legion-tracker-api.telkom.design/api/v1/coverage/overview', {
+      axios.get('https://legion-tracker-api.telkom.design/api/v1/coverage/overview', {
         headers: {
             'Authorization': TOKEN,}
         }
@@ -96,7 +96,7 @@ const Index = () => {
         replace("/login");
       })
 
-      axios.get('http://legion-tracker-api.telkom.design/api/v1/coverage/graph', {
+      axios.get('https://legion-tracker-api.telkom.design/api/v1/coverage/graph', {
         headers: {
             'Authorization': TOKEN,}
         }
