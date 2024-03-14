@@ -21,7 +21,7 @@ const FormInput = () => {
     .then((response) => {
       console.log(response);
       localStorage.setItem(TOKEN, response.data.data.token);
-      replace("/new2");
+      replace("/");
     })
     .catch((error)=> {
       console.log(error);
